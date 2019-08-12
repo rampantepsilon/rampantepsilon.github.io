@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Thomas Ware's Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Acme|Teko&display=swap" rel="stylesheet">
+    <link href="./styles/style.css" rel="stylesheet">
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/6.3.5/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/6.3.5/firebase-auth.js"></script>
+    <script defer src="/__/firebase/6.3.5/firebase-database.js"></script>
+    <script defer src="/__/firebase/6.3.5/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/6.3.5/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <script src='./scripts/index.js'></script>
+  </head>
+  <body>
+    <table width='85%' height='90px' id='top' align='center'>
+      <tr>
+        <td width='100px' align='center'>
+          <img src='./images/photo.jpg' width='70px' height='70px' id='avatar'/>
+        </td>
+        <td>
+          <h1 style="font-family: 'Acme', sans-serif;">Thomas "RampantEpsilon" Ware</h1>
+        </td>
+        <td id='linkbar' align='right'>
+          <table id='links'>
+            <tr>
+              <td id='linkButton' onclick='redirect("./")'>Home</td>
+              <td id='linkButton' onclick='redirect("./projects")'>Projects</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <table width='85%' id='body' align='center'>
+      <tr>
+        <td>
+          Below, you will find screenshots of all of my projects. Feel free to check them out. All of my source code can be found on <a onclick='newTab("https://github.com/rampantepsilon")'>GitHub.com</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+    </table>
+    <div id='bottom'><a href='https://www.pexels.com/photo/4k-wallpaper-architecture-background-black-1308624/'>Background Photo by Fancycrave.com from Pexels</a></div>
+  </body>
+</html>

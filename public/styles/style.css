@@ -1,0 +1,59 @@
+body{
+  font-family: 'Teko', sans-serif;
+  background-image: url(../images/background.jpg);
+  background-size: cover;
+  background-repeat: repeat-y;
+  background-position: top center
+}
+h1{
+  color: white;
+}
+a, a:hover, a:visited {
+  color: red;
+  text-decoration: none;
+}
+#bottom a, #bottom a:hover, #bottom a:visited{
+  color: white;
+  text-decoration: none;
+}
+#body{
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 0 0 25px 25px;
+  font-size: 24px;
+}
+#avatar{
+  border-radius: 50%;
+}
+#top{
+  background-color: rgba(20,20,20,0.85);
+  border-radius: 25px 25px 0 0;
+}
+#links{
+  font-size: 36px;
+  padding: 10px;
+  font-family: 'Acme', sans-serif;
+}
+#linkButton{
+  color: white;
+  background-color: black;
+  height: 85px;
+  text-align: center;
+  width: 175px;
+}
+#linkButton:hover{
+  color: white;
+  background-color: red;
+  height: 85px;
+  text-align: center;
+  width: 175px;
+}
+#bottom{
+  position: fixed;
+  bottom: 0;
+  width: 99%;
+  background-color: rgba(0,0,0,0.75);
+  color: white;
+  text-shadow: 1px 1px #333333;
+  text-align: center;
+  font-size: 18px;
+}
