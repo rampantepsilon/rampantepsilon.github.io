@@ -20,7 +20,7 @@
 
     <script src='./scripts/index.js'></script>
   </head>
-  <body>
+  <body onload='cursor()'>
     <table width='85%' height='90px' id='top' align='center'>
       <tr>
         <td width='100px' align='center'>
@@ -42,42 +42,84 @@
     <table width='85%' id='body' align='center'>
       <tr>
         <td colspan='2'>
-          Below, you will find screenshots of all of my projects. Feel free to check them out. All of my source code can be found on <a onclick='newTab("https://github.com/rampantepsilon")'>GitHub.com</a> or click on the projects name to see a working version or the GitHub project.
+          Below, you will find screenshots of all of my projects. Feel free to check them out. All of my source code can be found on <a class='link' onclick='newTab("https://github.com/rampantepsilon")'>GitHub.com</a> or click on the projects name to see a working version or the GitHub project.
         </td>
       </tr>
       <tr>
-        <td align='center' colspan='2'><h3 onclick='newTab("https://paycalc.rampantepsilon.site")'>Paycheck Calculator</h3></td>
+        <td align='center' colspan='2'><h3 class='link' onclick='newTab("https://paycalc.rampantepsilon.site")'>Paycheck Calculator</h3></td>
       </tr>
       <tr>
         <td align='left' valign='top'>
           This paycheck calculator was my first introduction to AngularJS. I love trying to do calculations especially when it's complicated like figuring taxes. So, I ultimately combined the two and this was the outcome. The calculator can give me figures with in a few cents of accuracy due to each employer having different systems calcualting everything.
           <br><br>As this was my introduction to how AngularJS works, I didn't spend time on formatting the site as I normally would. However, the functions of this site work splended and will get the job done. I more used this project to see how AngularJS and traditional Javascript worked together.
           <br><br>All figures are off of the IRS's tax tables.
-          <br><br>See the GitHub project for the Electron version <a onclick='newTab("https://github.com/rampantepsilon/rampant-payroll-calculator")'>HERE</a>
+          <br><br>See the GitHub project for the Electron version <a class='link' onclick='newTab("https://github.com/rampantepsilon/rampant-payroll-calculator")'>HERE</a> or click the image to view live.
         </td>
         <td align='right'>
-          <img src='./images/projects/paycalc.png' width='554px' height='350px'>
+          <img src='./images/projects/paycalc.png' width='554px' height='350px' class='link' onclick="newTab('https://paycalc.rampantepsilon.site')"/>
         </td>
       </tr>
       <tr>
-        <td align='center' colspan='2'><h3>Super Mario Odyssey Moon Randomizer</h3></td>
+        <td align='center' colspan='2'><h3 class='link' onclick="newTab('https://github.com/rampantepsilon/smorando/')">Super Mario Odyssey Moon Randomizer</h3></td>
       </tr>
       <tr>
-        <td>
+        <td valign='top'>
+          This project started as a personal challenge to make a speedrun randomizer for a game that I love playing. Super Mario Odyssey has collectibles that progress the game in the form of moons. What this randomizer does is take the major moons collected in the game through the speedrun (currently Any% and Festival% speedruns) gets a list of all available moons and provides the player a list of "required" moons.
+          <br><br>This randomizer takes cues from other video game randomizers in making routing be something that people have to do on the fly. It doesn't change the game or make it so only those moons can be collected. Essentially, this simply provides a challenge that can change every time.
+          <br><br>I was inspired to do this project after seeing <a class='link' onclick='newTab("https://github.com/JKTKops/Darker-Side-Randomizer")'>JKTKops' Darker Side Randomizer</a> that he created in Java. This made me want to use my growing interest of Electron apps and my knowledge of HTML, CSS, and Javascript to try my hand at creating a smaller scale version. This started to only have Any% routing in it and over time I've pushed myself to add more to the project. This has made it one of my stronger focused projects.
+          <br><br>This app has two release versions. One being a <a class='link' onclick="newTab('https://smorando.rampantepsilon.site')">web version</a> where you can play seeds with others without the need to download the randomizer. The other being the <a class='link' onclick="newTab('https://github.com/rampantepsilon/smorando/releases')">Electron download</a> which has support for Windows and Linux (due to me not being able to test MacOS currently).
+          <br><br>The bottom two images for this project show past web-versions. You can view those by clicking the links for <a class='link' onclick="newTab('https://smorando.rampantepsilon.site/archive/v2.0.0')">v2.0.0</a> or <a class='link' onclick="newTab('https://smorando.rampantepsilon.site/archive/v1.2.2')">v1.2.2</a>.
         </td>
-        <td>
+        <td valign='top' align='center' width='550px'>
+          <img class='link' src='./images/projects/smorando2.2.0-app.png' width='273px' height='250px' onclick="newTab('https://github.com/rampantepsilon/smorando/releases')"/>
+          <img class='link' src='./images/projects/smorando2.1.1web.png' width='267px' height='250px' onclick="newTab('https://smorando.rampantepsilon.site')"/>
+          <br>
+          <img class='link' src='./images/projects/smorando2.0.0web.png' width='267px' height='250px' onclick="newTab('https://smorando.rampantepsilon.site/archive/v2.0.0')"/>
+          <img class='link' src='./images/projects/smorando1.2.2web.png' width='267px' height='250px' onclick="newTab('https://smorando.rampantepsilon.site/archive/v1.2.2')"/>
         </td>
+      </tr>
       <tr>
-        <td align='center' colspan='2'><h3>The Gaming Saloon Network Site</h3></td>
+        <td align='center' colspan='2'><h3 class='link' onclick="newTab('https://tgsnetwork.org')">The Gaming Saloon Network Site</h3></td>
+      </tr>
+      <tr>
+        <td valign='top'>
+          This project came to me when I was watching Games Done Quick on Twitch. While watching, I took a look at their site and saw how clean and readily accessible it was to it's viewers. That's when I started working on this project.
+          <br><br>I've been a part of The Gaming Saloon Network for the past nine years since me and a friend started it. Over the time, I've been the one in charge of creating the overlays and site for our use. This was my first true foray into making a reactable site that viewers can see changes in realtime.
+          <br><br>This site uses Google Firebase for it's framework alongside HTML, CSS, and Javascript. I'm using the Firestore databases to allow viewers to see realtime updates to our TGS Articles part.
+          <br><br>In the second image you can see a snapshot of the Staff HQ. In this part, staff members can log in and update the TGS Articles, the Twitch Dashboard, and the Stream Statistics. This is all done through Firebase's Authentication and Databases in realtime with actual feedback to the user and anyone else online at that time.
+          <br><br>You can find the main site <a class='link' onclick="newTab('https://tgsnetwork.org')">HERE</a>
+        </td>
+        <td align='center' valign='top'>
+          <img class='link' src='./images/projects/TGSNSite.png' width='324px' height='300px' onclick="newTab('https://tgsnetwork.org')"/><br>
+          <img class='link' src='./images/projects/TGSNStaff.png' width='320px' height='300px' onclick="newTab('https://tgsnetwork.org/staff')"/>
+        </td>
       </tr>
       <tr>
         <td align='center' colspan='2'><h3>LiveSplit for Linux</h3></td>
       </tr>
       <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr>
         <td align='center' colspan='2'><h3>The Gaming Saloon Hub</h3></td>
       </tr>
       <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr>
         <td align='center' colspan="2"><h3>Thomas Metal Supply Site</h3></td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
       </tr>
       <tr>
         <td>
@@ -85,6 +127,6 @@
         </td>
       </tr>
     </table>
-    <div id='bottom'><a href='https://www.pexels.com/photo/4k-wallpaper-architecture-background-black-1308624/'>Background Photo by Fancycrave.com from Pexels</a></div>
+    <div id='bottom'><a onclick="newTab('https://www.pexels.com/photo/4k-wallpaper-architecture-background-black-1308624/')" target='_blank'>Background Photo by Fancycrave.com from Pexels</a></div>
   </body>
 </html>
