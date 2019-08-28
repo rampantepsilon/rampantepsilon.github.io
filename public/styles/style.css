@@ -78,3 +78,7 @@ a, a:hover, a:visited {
   left: 0;
   width: 100%;
 }
+
+.sticky + .content {
+  padding-top: 160px;
+}
