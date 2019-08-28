@@ -24,9 +24,16 @@ a, a:hover, a:visited {
 #avatar{
   border-radius: 50%;
 }
-#top{
+.top{
   background-color: rgba(20,20,20,0.85);
   border-radius: 25px 25px 0 0;
+  width: 85%;
+  height: 90px;
+}
+.topScroll{
+  background-color: rgba(20,20,20,0.85);
+  width: 99%;
+  height: 90px;
 }
 #links{
   font-size: 36px;
@@ -59,4 +66,15 @@ a, a:hover, a:visited {
 }
 .uiLink{
   font-family: 'Acme', sans-serif;
+}
+
+#navbar {
+  overflow: hidden;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }

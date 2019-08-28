@@ -34,24 +34,26 @@
     </script>
   </head>
   <body onload='cursor()'>
-    <table width='85%' height='90px' id='top' align='center'>
-      <tr>
-        <td width='100px' align='center'>
-          <img src='./images/photo.jpg' width='70px' height='70px' id='avatar'/>
-        </td>
-        <td>
-          <h1 style="font-family: 'Acme', sans-serif;">Thomas "RampantEpsilon" Ware</h1>
-        </td>
-        <td id='linkbar' align='right'>
-          <table id='links'>
-            <tr>
-              <td id='linkButton' class='link' onclick='redirect("./")'>Home</td>
-              <td id='linkButton' class='link' onclick='redirect("./projects")'>Projects</td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+    <div id='navbar'>
+      <table width='85%' height='90px' id='top' class='top' align='center'>
+        <tr>
+          <td width='100px' align='center'>
+            <img src='./images/photo.jpg' width='70px' height='70px' id='avatar'/>
+          </td>
+          <td>
+            <h1 style="font-family: 'Acme', sans-serif;">Thomas "RampantEpsilon" Ware</h1>
+          </td>
+          <td id='linkbar' align='right'>
+            <table id='links'>
+              <tr>
+                <td id='linkButton' class='link' onclick='redirect("./")'>Home</td>
+                <td id='linkButton' class='link' onclick='redirect("./projects")'>Projects</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
     <table width='85%' id='body' align='center'>
       <tr>
         <td colspan='2'>
@@ -153,6 +155,31 @@
         </td>
       </tr>
     </table>
+    <script>
+
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function() {myFunction()};
+
+    // Get the navbar
+    var navbar = document.getElementById("navbar");
+    var navTbl = document.getElementById("top");
+
+    // Get the offset position of the navbar
+    var sticky = navbar.offsetTop;
+
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+      if (window.pageYOffset >= (sticky+30)) {
+        navbar.classList.add("sticky");
+        navTbl.classList.remove("top");
+        navTbl.classList.add("topScroll");
+      } else {
+        navbar.classList.remove("sticky");
+        navTbl.classList.remove("topScroll");
+        navTbl.classList.add("top");
+      }
+    }
+    </script>
     <br>&nbsp;
     <div id='bottom'><a class='link' onclick="newTab('https://www.pexels.com/photo/4k-wallpaper-architecture-background-black-1308624/')">Background Photo by Fancycrave.com from Pexels</a></div>
   </body>
