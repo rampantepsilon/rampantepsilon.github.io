@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KH2FMR Hints</title>
+    <link rel="stylesheet" href="hints/style.css">
+    <script type="text/javascript" src="hints/js/main.js"></script>
+    <script type="text/javascript" src="hints/js/FileSaver.js"></script>
+</head>
+<body>
+
+    <header>KH2FM Randomizer Hints Demo</header>
+
+    <input type="file" id="csvFileInput" onchange="handleFiles(this.files)" accept=".pnach">
+
+    <button id="gen" type="button" onclick="generate()">Generate Hints</button>
+
+    <p>Select a seed and click the Generate Hints button. The seed needs to be a pnach file.</p>
+    <p>You can select a world below to exclude it.</p>
+
+    <div id="replace">
+        <table>
+            <tr>
+                <td>
+                    <label><input type="checkbox" id="Simulated Twilight Town" onclick="exclude(this.id)"/>Simulated Twilight Town</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label><input type="checkbox" id="100 Acre Wood" onclick="exclude(this.id)" checked>100 Acre Wood (Disabled)</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label><input type="checkbox" id="Atlantica" onclick="exclude(this.id)" checked>Atlantica (Disabled)</label>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <p>If you're playing the same seed with other people and want the same hints, click the "Save Hints" button. This will save the hints as a text file that you can send to the other players.</p>
+    <button id="save-btn" onclick="save()">Save Hints</button>
+    <br>
+    <p>Select the hints text file that was sent to you and click "Upload Hints" to get the same hints as the person who generated them.</p>
+    <input type="file" id="textFileInput" onchange="handleFiles(this.files)" accept=".txt">
+    <button id="upload-btn" onclick="uploadHints()">Upload Hints</button>
+    <br>
+
+    <hr>
+
+    <p id="confirm">No hints have been generated yet.</p>
+
+    <hr>
+
+    <div id="table">
+		<button id="1" onclick="reveal(this.id)">Hint 1</button>
+		<span id="report-1">Click to reveal hint</span>
+		<br>
+		<button id="2" onclick="reveal(this.id)">Hint 2</button>
+		<span id="report-2">Click to reveal hint</span>
+		<br>
+		<button id="3" onclick="reveal(this.id)">Hint 3</button>
+		<span id="report-3">Click to reveal hint</span>
+		<br>
+		<button id="4" onclick="reveal(this.id)">Hint 4</button>
+		<span id="report-4">Click to reveal hint</span>
+		<br>
+		<button id="5" onclick="reveal(this.id)">Hint 5</button>
+		<span id="report-5">Click to reveal hint</span>
+		<br>
+		<button id="6" onclick="reveal(this.id)">Hint 6</button>
+		<span id="report-6">Click to reveal hint</span>
+		<br>
+		<button id="7" onclick="reveal(this.id)">Hint 7</button>
+		<span id="report-7">Click to reveal hint</span>
+		<br>
+		<button id="8" onclick="reveal(this.id)">Hint 8</button>
+		<span id="report-8">Click to reveal hint</span>
+		<br>
+		<button id="9" onclick="reveal(this.id)">Hint 9</button>
+		<span id="report-9">Click to reveal hint</span>
+		<br>
+		<button id="10" onclick="reveal(this.id)">Hint 10</button>
+		<span id="report-10">Click to reveal hint</span>
+		<br>
+		<button id="11" onclick="reveal(this.id)">Hint 11</button>
+		<span id="report-11">Click to reveal hint</span>
+		<br>
+		<button id="12" onclick="reveal(this.id)">Hint 12</button>
+		<span id="report-12">Click to reveal hint</span>
+		<br>
+		<button id="13" onclick="reveal(this.id)">Hint 13</button>
+		<span id="report-13">Click to reveal hint</span>
+		<br>
+		<button id="14" onclick="reveal(this.id)">Hint 14</button>
+		<span id="report-14">Click to reveal hint</span>
+		<br>
+		<button id="15" onclick="reveal(this.id)">Hint 15</button>
+		<span id="report-15">Click to reveal hint</span>
+		<br>
+		<button id="16" onclick="reveal(this.id)">Hint 16</button>
+		<span id="report-16">Click to reveal hint</span>
+    </div>
+
+	<hr>
+
+	<div>
+		<ul>
+			<li>Important Checks
+				<ul>
+					<li>3 Proofs
+					<li>Promise Charm
+					<li>5 drive forms
+					<li>4 summons
+					<li>Magic (18 total)
+					<li>13 Ansem Reports
+				</ul>
+			</li>
+			<li>Other notes
+				<ul>
+					<li>Disney Castle and Timeless River are combined into "Disney Castle"
+					<li>Cavern of Remembrance is considered part of "Hollow Bastion"
+					<li>Sora's Heart refers to level ups (level up checks only go up to 50 right now)
+					<li>Absent Silhouettes and Data Org members are included in their respective worlds
+				</ul>
+			</li>
+      <li>How To Use In-Game
+        <ul>
+          <li>Hints can be revealed by one of two methods.
+            <ol>
+              <li>
+                Completing all story requirements for the world (denoted by the doorway changing color)
+              </li>
+              <li>
+                Finding Ansem Reports. Each report found will open the corresponding hint. (i.e. Report 10 will open hint 10)
+              </li>
+            </ol>
+          </li>
+          <li>
+            Stipulations on open hints are subject to the runner and all checks except 100 Acre and Atlantica can potentially be revealed using this method.
+          </li>
+        </ul>
+      </li>
+		</ul>
+	</div>
+
+</body>
+</html>
