@@ -1,3 +1,11 @@
+.txtDeco{
+  text-decoration: none;
+}
+.bckgrndColor{
+  background-color: rgba(20,20,20,0.85);
+}
+@height: 90px;
+
 body{
   font-family: 'Teko', sans-serif;
   background-image: url(../images/background.jpg);
@@ -10,11 +18,11 @@ h1{
 }
 a, a:hover, a:visited {
   color: red;
-  text-decoration: none;
+  .txtDeco();
 }
 #bottom a, #bottom a:hover, #bottom a:visited{
   color: white;
-  text-decoration: none;
+  .txtDeco();
 }
 #body{
   background-color: rgba(255,255,255,0.75);
@@ -25,15 +33,15 @@ a, a:hover, a:visited {
   border-radius: 50%;
 }
 .top{
-  background-color: rgba(20,20,20,0.85);
   border-radius: 25px 25px 0 0;
   width: 85%;
-  height: 90px;
+  height: @height;
+  .bckgrndColor();
 }
 .topScroll{
-  background-color: rgba(20,20,20,0.85);
   width: 99%;
-  height: 90px;
+  height: @height;
+  .bckgrndColor();
 }
 #links{
   font-size: 36px;
@@ -43,16 +51,12 @@ a, a:hover, a:visited {
 #linkButton{
   color: white;
   background-color: black;
-  height: 85px;
+  height: @height - 5px;
   text-align: center;
   width: 175px;
-}
-#linkButton:hover{
-  color: white;
-  background-color: red;
-  height: 85px;
-  text-align: center;
-  width: 175px;
+  &:hover{
+    background-color: red;
+  }
 }
 #bottom{
   position: fixed;
