@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Manual Archipelago Web Client</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="jszip.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <table style="width: 98vw; text-align: center; vertical-align: middle;">
+        <tr>
+            <td style="text-align: right; width:40%">Hostname:</td>
+            <td style="text-align: left"><input id="hostname" type='text' class="login" size="40"
+                    value="archipelago.gg"></td>
+            <!--<td style="text-align: left"><input id="hostname" type='text' class="login" size="40" value="localhost">-->
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: right">Port:</td>
+            <td style="text-align: left"><input id="port" type='text' class="login" size="40" value="38281"></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">Game Name:</td>
+            <td style="text-align: left"><input id="game" type='text' class="login" size="40"
+                    value="Manual_{Game}_{Creator}"></td>
+            <!--<td style="text-align: left"><input id="game" type='text' class="login" size="40"
+                    value="Manual_MarvelSNAP_JHobz"></td>-->
+        </tr>
+        <tr>
+            <td style="text-align: right">Player Name:</td>
+            <td style="text-align: left">
+                <input id="player" type='text' class="login" size="40" value="Player 1">
+                <!--<input id="player" type='text' class="login" size="40" value="REpsilonSNAP">-->
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Load APWorld for Styling & Game Autofill: <input type="file" id="style" name="style">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button onclick="connect()" style="width: 300px;">Connect</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="err" style="background-color: red;"></div>
+            </td>
+        </tr>
+    </table>
+    <div style="text-align: center; width: 100%; position:fixed; bottom: 0px;" id="buildText" onclick="changeLog()">
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <span id="changelog"></span>
+        </div>
+
+    </div>
+
+    <script src="scripts/build.js"></script>
+    <script src="scripts/login.js"></script>
+</body>
+
+</html>
