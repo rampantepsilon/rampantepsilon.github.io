@@ -64,10 +64,10 @@ function generate() {
         document.getElementById('gen').style.backgroundColor = "green";
         document.getElementById('gen').disabled = true;
         document.getElementById('confirm').innerHTML = "Hints have been generated! Refresh to play again.";
-        document.getElementById('Simulated Twilight Town').disabled = true;
+        /*document.getElementById('Simulated Twilight Town').disabled = true;
         document.getElementById('100 Acre Wood').disabled = true;
-        document.getElementById('Atlantica').disabled = true;
-        for(var i = 1; i < 17; i++) {
+        document.getElementById('Atlantica').disabled = true;*/
+        for(var i = 1; i < 19; i++) {
             document.getElementById('report-' + i).innerHTML = "Click to reveal hint";
         }
         getLists();
@@ -95,10 +95,10 @@ function uploadHints() {
     document.getElementById('upload-btn').disabled = true;
     document.getElementById('gen').disabled = true;
     document.getElementById('confirm').innerHTML = "Hints have been uploaded! Refresh to play again.";
-    document.getElementById('Simulated Twilight Town').disabled = true;
+    /*document.getElementById('Simulated Twilight Town').disabled = true;
     document.getElementById('100 Acre Wood').disabled = true;
-    document.getElementById('Atlantica').disabled = true;
-    for(var i = 1; i < 16; i++) {
+    document.getElementById('Atlantica').disabled = true;*/
+    for(var i = 1; i < 19; i++) {
         document.getElementById('report-' + i).innerHTML = "Click to reveal hint";
     }
 }
@@ -156,7 +156,23 @@ var keyItems = [
     //"00000020",
 
     //Ansem Reports
-    "000000E2", "000000E3", "000000E4", "000000E5", "000000E6", "000000E7", "000000E8", "000000E9", "000000EA", "000000EB", "000000EC", "000000ED", "000000EE"
+    //"000000E2", "000000E3", "000000E4", "000000E5", "000000E6", "000000E7", "000000E8", "000000E9", "000000EA", "000000EB", "000000EC", "000000ED", "000000EE"
+
+    /*Growth Abilities*/
+    //High Jump
+    "0000005E", "0000005F", "00000060", "00000061",
+
+    //Quick Run
+    "00000062", "00000063", "00000064", "00000065",
+
+    //Dodge Roll
+    "00000234", "00000235", "00000236", "00000237",
+
+    //Aerial Dodge
+    "00000066", "00000067", "00000068", "00000069",
+
+    //Glide
+    "0000006A", "0000006B", "0000006C", "0000006D"
 ];
 
 var growthItems = [
@@ -211,21 +227,13 @@ function numberOfGrowth(world) {
 
 function writeHint(world, numbers) {
   var number = numbers[0];
-  var number2 = numbers[1];
-  
+  //var number2 = numbers[1];
+
     if(number === 1) {
-      if (number2 === 1){
-        var hint = world + " has " + number + " important check and " + number2 + " growth ability.";
-      } else {
-        var hint = world + " has " + number + " important check and " + number2 + " growth abilities.";
-      }
+      var hint = world + " has " + number + " important check.";
     }
     else {
-      if (number2 === 1){
-        var hint = world + " has " + number + " important checks and " + number2 + " growth ability.";
-      } else {
-        var hint = world + " has " + number + " important checks and " + number2 + " growth abilities.";
-      }
+      var hint = world + " has " + number + " important checks.";
     }
     return hint;
 }
@@ -233,97 +241,101 @@ function writeHint(world, numbers) {
 function createHints() {
     var AW = createWorldList(AcreWood);
     var AWnumber = numberOfChecks(AW);
-    var AWnumber2 = numberOfGrowth(AW);
+    //var AWnumber2 = numberOfGrowth(AW);
+
+    var ATL = createWorldList(Atlantica);
+    var ATLnumber = numberOfChecks(ATL);
 
     var STT = createWorldList(SimulatedTwilightTown);
     var STTnumber = numberOfChecks(STT);
-    var STTnumber2 = numberOfGrowth(STT);
+    //var STTnumber2 = numberOfGrowth(STT);
 
     var TT = createWorldList(TwilightTown);
     var TTnumber = numberOfChecks(TT);
-    var TTnumber2 = numberOfGrowth(TT);
+    //var TTnumber2 = numberOfGrowth(TT);
 
     var HB = createWorldList(HollowBastion);
     var HBnumber = numberOfChecks(HB);
-    var HBnumber2 = numberOfGrowth(HB);
+    //var HBnumber2 = numberOfGrowth(HB);
 
     var COR = createWorldList(CoR);
     var CoRnumber = numberOfChecks(COR);
-    var CoRnumber2 = numberOfGrowth(COR);
+    //var CoRnumber2 = numberOfGrowth(COR);
 
     var BC = createWorldList(BeastsCastle);
     var BCnumber = numberOfChecks(BC);
-    var BCnumber2 = numberOfGrowth(BC);
+    //var BCnumber2 = numberOfGrowth(BC);
 
     var OC = createWorldList(OlympusColiseum);
     var OCnumber = numberOfChecks(OC);
-    var OCnumber2 = numberOfGrowth(OC);
+    //var OCnumber2 = numberOfGrowth(OC);
 
     var AG = createWorldList(Agrabah);
     var AGnumber = numberOfChecks(AG);
-    var AGnumber2 = numberOfGrowth(AG);
+    //var AGnumber2 = numberOfGrowth(AG);
 
     var LOD = createWorldList(LandOfDragons);
     var LODnumber = numberOfChecks(LOD);
-    var LODnumber2 = numberOfGrowth(LOD);
+    //var LODnumber2 = numberOfGrowth(LOD);
 
     var PL = createWorldList(PrideLands);
     var PLnumber = numberOfChecks(PL);
-    var PLnumber2 = numberOfGrowth(PL);
+    //var PLnumber2 = numberOfGrowth(PL);
 
     var DC = createWorldList(DisneyCastle);
     var DCnumber = numberOfChecks(DC);
-    var DCnumber2 = numberOfGrowth(DC);
+    //var DCnumber2 = numberOfGrowth(DC);
 
     var HT = createWorldList(HalloweenTown);
     var HTnumber = numberOfChecks(HT);
-    var HTnumber2 = numberOfGrowth(HT);
+    //var HTnumber2 = numberOfGrowth(HT);
 
     var PR = createWorldList(PortRoyal);
     var PRnumber = numberOfChecks(PR);
-    var PRnumber2 = numberOfGrowth(PR);
+    //var PRnumber2 = numberOfGrowth(PR);
 
     var SP = createWorldList(SpaceParanoids);
     var SPnumber = numberOfChecks(SP);
-    var SPnumber2 = numberOfGrowth(SP);
+    //var SPnumber2 = numberOfGrowth(SP);
 
     var TWTNW = createWorldList(TheWorldThatNeverWas);
     var TWTNWnumber = numberOfChecks(TWTNW);
-    var TWTNWnumber2 = numberOfGrowth(TWTNW);
+    //var TWTNWnumber2 = numberOfGrowth(TWTNW);
 
     var DF = createWorldList(Forms);
     var DFnumber = numberOfChecks(DF);
-    var DFnumber2 = numberOfGrowth(DF);
+    //var DFnumber2 = numberOfGrowth(DF);
 
     var LU = createWorldList(Levels);
     var LUnumber = numberOfChecks(LU);
-    var LUnumber2 = numberOfGrowth(LU);
+    //var LUnumber2 = numberOfGrowth(LU);
 
     var worldChecks = {
-        /*"100 Acre Wood" : AWnumber,*/
-        "Simulated Twilight Town" : [STTnumber,STTnumber2],
-        "Twilight Town" : [TTnumber,TTnumber2],
-        "Hollow Bastion" : [HBnumber,HBnumber2],
-        "Cavern of Remembrance": [CoRnumber,CoRnumber2],
-        "Beast's Castle" : [BCnumber,BCnumber2],
-        "Olympus Coliseum" : [OCnumber,OCnumber2],
-        "Agrabah" : [AGnumber,AGnumber2],
-        "Land of Dragons" : [LODnumber,LODnumber2],
-        "Pride Lands" : [PLnumber,PLnumber2],
-        "Disney Castle" : [DCnumber,DCnumber2],
-        "Halloween Town" : [HTnumber,HTnumber2],
-        "Port Royal" : [PRnumber,PRnumber2],
-        "Space Paranoids" : [SPnumber,SPnumber2],
-        "The World That Never Was" : [TWTNWnumber,TWTNWnumber2],
-        "Drive Forms" : [DFnumber,DFnumber2],
-        "Sora's Heart" : [LUnumber,LUnumber2]
+        "100 Acre Wood" : [AWnumber],
+        "Atlantica" : [ATLnumber],
+        "Simulated Twilight Town" : [STTnumber],
+        "Twilight Town" : [TTnumber],
+        "Hollow Bastion" : [HBnumber],
+        "Cavern of Remembrance": [CoRnumber],
+        "Beast's Castle" : [BCnumber],
+        "Olympus Coliseum" : [OCnumber],
+        "Agrabah" : [AGnumber],
+        "Land of Dragons" : [LODnumber],
+        "Pride Lands" : [PLnumber],
+        "Disney Castle" : [DCnumber],
+        "Halloween Town" : [HTnumber],
+        "Port Royal" : [PRnumber],
+        "Space Paranoids" : [SPnumber],
+        "The World That Never Was" : [TWTNWnumber],
+        "Drive Forms" : [DFnumber],
+        "Sora's Heart" : [LUnumber]
     }
 
     allworlds = shuffle(allworlds);
 
     console.log(worldChecks[allworlds[0]]);
 
-    for(var i = 0; i < 16; i++) {
+    for(var i = 0; i < 18; i++) {
         hints.push(writeHint(allworlds[i], worldChecks[allworlds[i]]));
     }
 
@@ -331,7 +343,7 @@ function createHints() {
 
 //Remove world from list of possible hints
 function exclude(id) {
-    if(document.getElementById(id).checked) {
+    /*if(document.getElementById(id).checked) {
         for(var i = 0; i < allworlds.length; i++) {
             if(allworlds[i] === id) {
                 allworlds.splice(i, 1);
@@ -340,10 +352,13 @@ function exclude(id) {
     }
     else {
         allworlds.push(id);
-    }
+    }*/
+    allworlds.push(id);
 }
 
 var allworlds = [
+    "100 Acre Wood",
+    "Atlantica",
     "Simulated Twilight Town",
     "Twilight Town",
     "Hollow Bastion",
