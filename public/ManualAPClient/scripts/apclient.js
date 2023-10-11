@@ -172,6 +172,28 @@ function itemSearch() {
     }
 }
 
+function itemCatClose(category) {
+    // Locate the card elements
+    let cards = document.querySelectorAll('.items')
+    // Locate the search input
+    let search_query = category;
+    // Loop through the cards
+    for (var i = 0; i < cards.length; i++) {
+        // If the text is within the card...
+        if (cards[i].id.toLowerCase()
+            // ...and the text matches the search query...
+            .includes(search_query.toLowerCase())) {
+            if (cards[i].innerHTML.indexOf(category) != 0) {
+                if (cards[i].classList.contains('is-hidden')) {
+                    cards[i].classList.remove("is-hidden");
+                } else {
+                    cards[i].classList.add("is-hidden");
+                }
+            }
+        }
+    }
+}
+
 function changeColor() {
     if (!this.style.backgroundColor) {
         this.style.backgroundColor = 'red';

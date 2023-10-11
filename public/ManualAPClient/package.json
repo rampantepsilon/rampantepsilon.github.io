@@ -1,0 +1,19 @@
+{
+  "name": "manual-ap-client",
+  "version": "1.0.0",
+  "description": "Web client for Manual Archipelago worlds. (Replacement for the Manual AP Client)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rampantepsilon/manual_ap_client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rampantepsilon/manual_ap_client/issues"
+  },
+  "homepage": "https://github.com/rampantepsilon/manual_ap_client#readme"
+}
