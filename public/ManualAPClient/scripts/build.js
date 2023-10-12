@@ -1,12 +1,10 @@
-var versionTag = "Archipelago Web Client v0.4.3 Build 20231011";
+var versionTag = "Archipelago Web Client v0.4.3 Build 20231012";
 
 document.getElementById('buildText').innerHTML = versionTag;
 
 document.getElementById('changelog').innerHTML = `<h3>Changes to ` + versionTag + `</h3>
 <ul>
-<li>Added ability to hide item categories by clicking on them.</li>
-<li>Added Chat Functionality</li>
-<li>Player name colored when used in chat (Useful for @'ing another player)</li>
+<li>Changed Chat layout to be easier to track updates</li>
 </ul>
 <h4>Upcoming Changes</h4>
 <ul>
