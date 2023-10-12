@@ -195,7 +195,7 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
     }
 
     var oldmsg = document.getElementById('log').innerHTML;
-    document.getElementById('log').innerHTML = "<li>" + newMessage + "</li>" + oldmsg;
+    document.getElementById('log').innerHTML = "<div class='textMsg'>" + newMessage + "</div>" + oldmsg + "";
 });
 
 // Connect to the Archipelago server

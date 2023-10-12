@@ -314,3 +314,9 @@ div#locations {
     text-decoration: none;
     cursor: pointer;
 }
+
+.textMsg {
+    border: solid white 1px;
+    background-color: #3f3f3f;
+    padding: 7px;
+}
