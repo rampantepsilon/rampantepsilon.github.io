@@ -1,3 +1,10 @@
+//Background
+if (sessionStorage.getItem('background')) {
+    document.body.style.backgroundImage = "url(" + sessionStorage.getItem('background') + ")";
+    document.body.style.backgroundRepeat = 'no-repeat';
+    document.body.style.backgroundSize = "auto 100vh";
+}
+
 //Arrays for info from server
 var locationIds = [];
 var locationNames = [];
@@ -33,10 +40,11 @@ function itemsListVar() {
 itemsListVar();
 
 function disconnect() {
-    sessionStorage.removeItem('locations', '');
-    sessionStorage.removeItem('uniqueCat', '');
-    sessionStorage.removeItem('items', '');
-    sessionStorage.removeItem('uniqueItems', '');
+    sessionStorage.removeItem('locations');
+    sessionStorage.removeItem('uniqueCat');
+    sessionStorage.removeItem('items');
+    sessionStorage.removeItem('uniqueItems');
+    sessionStorage.removeItem('background');
 
     window.location.href = './index.html'
 }
@@ -56,6 +64,19 @@ $("#style").on("change", function (evt) {
 
             const file_locations = zip.file(rootDir + `/data/locations.json`);
             const file_items = zip.file(rootDir + `/data/items.json`);
+            const game_name = zip.file(rootDir + `/data/game.json`);
+
+            if (game_name) {
+                game_name.async('string')
+                    .then((content) => {
+                        var gameTemp = JSON.parse(content);
+                        if (gameTemp['background-image']) {
+                            document.body.style.backgroundImage = url(gameTemp['background-image']);
+                            sessionStorage.setItem('background', gameTemp['background-image'])
+                        }
+                    })
+            }
+
             if (file_locations) {
                 file_locations.async('string')
                     .then((content) => {
@@ -128,7 +149,7 @@ function itemCounter() {
 }
 
 function reload() {
-    window.location.href = './index.html'
+    window.location.href = './apclient.html'
 }
 
 //Filter Location Scripting

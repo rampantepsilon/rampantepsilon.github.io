@@ -5,11 +5,12 @@ document.getElementById('buildText').innerHTML = versionTag;
 document.getElementById('changelog').innerHTML = `<h3>Changes to ` + versionTag + `</h3>
 <ul>
 <li>Changed Chat layout to be easier to track updates</li>
+<li>Added Support for Game Backgrounds (Add "background": "URL TO IMAGE" to the game.json file in the .apworld) [Currently only working with external images]</li>
+<li>Changed Background color to be readable with custom backgrounds.</li>
 </ul>
 <h4>Upcoming Changes</h4>
 <ul>
 <li>Further formatting to clean up the appearance</li>
-<li>Chat function</li>
 <li>Hint Tracking</li>
 </ul>`
 

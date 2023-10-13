@@ -40,6 +40,9 @@ function complete(host, port, game, player) {
     if (!sessionStorage.getItem('uniqueItems')) {
         sessionStorage.setItem('uniqueItems', '');
     }
+    if (!sessionStorage.getItem('count')) {
+        sessionStorage.setItem('count', '')
+    }
 
     window.location.href = './apclient.html'
 }
@@ -72,6 +75,10 @@ $("#style").on("change", function (evt) {
                         if (gameTemp['player']) {
                             document.getElementById('game').value = "Manual_" + gameTemp['game'] + "_" + gameTemp['player'];
                             document.getElementById('game').disabled = 'true';
+                        }
+                        if (gameTemp['background-image']) {
+                            document.body.style.backgroundImage = "url(gameTemp['background-image'])";
+                            sessionStorage.setItem('background', gameTemp['background-image'])
                         }
                     })
             }
