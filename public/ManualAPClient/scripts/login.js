@@ -76,6 +76,12 @@ $("#style").on("change", function (evt) {
                             document.getElementById('game').value = "Manual_" + gameTemp['game'] + "_" + gameTemp['player'];
                             document.getElementById('game').disabled = 'true';
                         }
+                        //Override for Manual_SMOFestival
+                        if (gameTemp['game'] == "SMO" && gameTemp['player']) {
+                            console.log('true')
+                            document.getElementById('game').value = "Manual_" + gameTemp['game'] + gameTemp['player'];
+                            document.getElementById('game').disabled = 'true';
+                        }
                         if (gameTemp['background-image']) {
                             document.body.style.backgroundImage = "url(gameTemp['background-image'])";
                             sessionStorage.setItem('background', gameTemp['background-image'])

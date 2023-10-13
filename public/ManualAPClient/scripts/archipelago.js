@@ -192,6 +192,13 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
         } else {
             newMessage = newMessage.substring(0, newMessage.indexOf(sessionStorage.getItem('player'))) + `<span style="color: rgb(0, 173, 145);">` + sessionStorage.getItem('player') + `</span>` + remMessage;
         }
+        //Item Color (WIP)
+        for (var i = 0; i < itemNames.length; i++) {
+            if (newMessage.includes(itemNames[i])) {
+                var itemSplit = newMessage.split(itemNames[i])[1];
+                newMessage = newMessage.substring(0, newMessage.indexOf(itemNames[i])) + `<span style="color: rgb(255, 94, 94);">` + itemNames[i] + `</span>` + itemSplit;
+            }
+        }
     }
 
     var oldmsg = document.getElementById('log').innerHTML;
@@ -207,7 +214,7 @@ client
     })
     .catch((error) => {
         console.error("Failed to connect:", error);
-        document.getElementById('log').innerHTML = "<li>Failed to connect: " + error + " (Player: " + sessionStorage.getItem('player') + " is not a valid player.)</li>";
+        document.getElementById('log').innerHTML = "<li>Failed to connect: " + error + " (Player: " + sessionStorage.getItem('player') + " is not a valid player for " + sessionStorage.getItem('game') + ")</li>";
         // Handle the connection error.
     });
 

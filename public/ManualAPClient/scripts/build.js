@@ -7,11 +7,13 @@ document.getElementById('changelog').innerHTML = `<h3>Changes to ` + versionTag 
 <li>Changed Chat layout to be easier to track updates</li>
 <li>Added Support for Game Backgrounds (Add "background": "URL TO IMAGE" to the game.json file in the .apworld) [Currently only working with external images]</li>
 <li>Changed Background color to be readable with custom backgrounds.</li>
+<li>Added Item Color for player items</li>
 </ul>
 <h4>Upcoming Changes</h4>
 <ul>
 <li>Further formatting to clean up the appearance</li>
 <li>Hint Tracking</li>
+<li>Color Items based on type (Progression, Useful, Filler, Trap)
 </ul>`
 
 // Get the modal
