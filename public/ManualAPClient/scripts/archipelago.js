@@ -195,8 +195,10 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
         //Item Color (WIP)
         for (var i = 0; i < itemNames.length; i++) {
             if (newMessage.includes(itemNames[i])) {
-                var itemSplit = newMessage.split(itemNames[i])[1];
-                newMessage = newMessage.substring(0, newMessage.indexOf(itemNames[i])) + `<span style="color: rgb(255, 94, 94);">` + itemNames[i] + `</span>` + itemSplit;
+                if (newMessage.includes('found') || newMessage.includes('sent')) {
+                    var itemSplit = newMessage.split(itemNames[i])[1];
+                    newMessage = newMessage.substring(0, newMessage.indexOf(itemNames[i])) + `<span style="color: rgb(255, 94, 94);">` + itemNames[i] + `</span>` + itemSplit;
+                }
             }
         }
     }
