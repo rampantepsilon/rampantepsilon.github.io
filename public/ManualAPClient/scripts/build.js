@@ -1,13 +1,10 @@
-var versionTag = "Archipelago Web Client v0.4.3 Build 20231012";
+var versionTag = "Archipelago Web Client v0.4.3 Build 20231013";
 
 document.getElementById('buildText').innerHTML = versionTag;
 
 document.getElementById('changelog').innerHTML = `<h3>Changes to ` + versionTag + `</h3>
 <ul>
-<li>Changed Chat layout to be easier to track updates</li>
-<li>Added Support for Game Backgrounds (Add "background": "URL TO IMAGE" to the game.json file in the .apworld) [Currently only working with external images]</li>
-<li>Changed Background color to be readable with custom backgrounds.</li>
-<li>Added Item Color for player items</li>
+<li>Fixed issue where player's own hints would truncate at second instance of player name.</li>
 </ul>
 <h4>Upcoming Changes</h4>
 <ul>

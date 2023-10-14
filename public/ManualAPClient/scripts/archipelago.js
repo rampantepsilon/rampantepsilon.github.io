@@ -185,12 +185,19 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
 
     //Color Code for player
     if (newMessage.includes(sessionStorage.getItem('player'))) {
-        var remMessage = newMessage.split(sessionStorage.getItem('player'))[1];
+        var splitMsg = newMessage.split(sessionStorage.getItem('player'))
+        var remMessage = splitMsg[1];
 
         if (newMessage.indexOf(sessionStorage.getItem('player')) == 0) {
             newMessage = `<span style="color: rgb(0, 173, 145);">` + sessionStorage.getItem('player') + `</span>` + remMessage;
+            if (splitMsg[2]) {
+                newMessage += `<span style="color: rgb(0, 173, 145);">` + sessionStorage.getItem('player') + `</span>` + splitMsg[2];
+            }
         } else {
             newMessage = newMessage.substring(0, newMessage.indexOf(sessionStorage.getItem('player'))) + `<span style="color: rgb(0, 173, 145);">` + sessionStorage.getItem('player') + `</span>` + remMessage;
+            if (splitMsg[2]) {
+                newMessage += `<span style="color: rgb(0, 173, 145);">` + sessionStorage.getItem('player') + `</span>` + splitMsg[2];
+            }
         }
         //Item Color (WIP)
         for (var i = 0; i < itemNames.length; i++) {
