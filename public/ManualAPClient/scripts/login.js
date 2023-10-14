@@ -17,7 +17,11 @@ function connect() {
     var player = document.getElementById('player').value;
 
     if (game.includes('Manual_')) {
-        complete(host, port, game, player);
+        if (document.getElementById('style').files.length == 0) {
+            document.getElementById('err').innerHTML = "No APWorld supplied. Please supply the .apworld file pertaining to the game to continue."
+        } else {
+            complete(host, port, game, player);
+        }
     } else {
         document.getElementById('err').innerHTML = "Invalid Game! Game must be a Manual AP world formatted as 'Manual_{Game}_{Creator}' or 'Manual_{Game}' (Second instance is rare).<br>Please correct and try again."
     }
@@ -70,17 +74,14 @@ $("#style").on("change", function (evt) {
                         var gameTemp = JSON.parse(content);
                         if (gameTemp['creator']) {
                             document.getElementById('game').value = "Manual_" + gameTemp['game'] + "_" + gameTemp['creator'];
-                            document.getElementById('game').disabled = 'true';
                         }
                         if (gameTemp['player']) {
                             document.getElementById('game').value = "Manual_" + gameTemp['game'] + "_" + gameTemp['player'];
-                            document.getElementById('game').disabled = 'true';
                         }
                         //Override for Manual_SMOFestival
                         if (gameTemp['game'] == "SMO" && gameTemp['player']) {
                             console.log('true')
                             document.getElementById('game').value = "Manual_" + gameTemp['game'] + gameTemp['player'];
-                            document.getElementById('game').disabled = 'true';
                         }
                         if (gameTemp['background-image']) {
                             document.body.style.backgroundImage = "url(gameTemp['background-image'])";

@@ -320,3 +320,8 @@ div#locations {
     background-color: #3f3f3f;
     padding: 7px;
 }
+
+input[type=text]:disabled {
+    background-color: black;
+    color: white;
+}

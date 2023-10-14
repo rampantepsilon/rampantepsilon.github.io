@@ -134,17 +134,19 @@ $("#style").on("change", function (evt) {
 })
 
 function itemCounter() {
-    for (var i = 0; i < uniqueItems.length; i++) {
-        styleSplit = uniqueItems[i].split(' ');
-        var styleCombine = '';
+    if (document.getElementById(uniqueItems[0] + '2')) {
+        for (var i = 0; i < uniqueItems.length; i++) {
+            styleSplit = uniqueItems[i].split(' ');
+            var styleCombine = '';
 
-        for (var l = 0; l < styleSplit.length; l++) {
-            styleCombine += styleSplit[l];
+            for (var l = 0; l < styleSplit.length; l++) {
+                styleCombine += styleSplit[l];
+            }
+
+            var parseName = '.' + styleCombine + ":visible";
+            var visible = $(parseName).length;
+            document.getElementById(uniqueItems[i] + '2').innerHTML = visible;
         }
-
-        var parseName = '.' + styleCombine + ":visible";
-        var visible = $(parseName).length;
-        document.getElementById(uniqueItems[i] + '2').innerHTML = visible;
     }
 }
 
