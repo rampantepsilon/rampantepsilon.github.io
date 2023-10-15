@@ -51,6 +51,23 @@ function complete(host, port, game, player) {
     window.location.href = './apclient.html'
 }
 
+/*Revisit later
+function loadFromURL() {
+    var zip = new JSZip();
+    var apworldURL = document.getElementById('styleURL').value;
+
+    JSZipUtils.getBinaryContent(apworldURL, function (err, data) {
+        if (err) {
+            throw err;
+        }
+
+        JSZip.loadAsync(data).then(function (zip) {
+            console.log(zip.files);
+        })
+    })
+}
+*/
+
 //Allow grouping from APWorld
 $("#style").on("change", function (evt) {
     var zip = new JSZip();
@@ -84,7 +101,7 @@ $("#style").on("change", function (evt) {
                             document.getElementById('game').value = "Manual_" + gameTemp['game'] + gameTemp['player'];
                         }
                         if (gameTemp['background-image']) {
-                            document.body.style.backgroundImage = "url(gameTemp['background-image'])";
+                            document.html.style.backgroundImage = "url(gameTemp['background-image'])";
                             sessionStorage.setItem('background', gameTemp['background-image'])
                         }
                     })

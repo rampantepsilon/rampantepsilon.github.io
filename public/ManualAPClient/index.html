@@ -6,48 +6,64 @@
     <title>Manual Archipelago Web Client</title>
     <link rel="stylesheet" href="style.css">
     <script src="jszip.js"></script>
+    <script src="scripts/jszip-utils.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
+    <div class="loginTitle">
+        <h1>MANUAL ARCHIPELAGO WEB CLIENT</h1>
+    </div>
     <table style="width: 98vw; text-align: center; vertical-align: middle;">
         <tr>
-            <td style="text-align: right; width:40%">Hostname:</td>
-            <td style="text-align: left"><input id="hostname" type='text' class="login" size="40"
-                    value="archipelago.gg"></td>
-            <!--<td style="text-align: left"><input id="hostname" type='text' class="login" size="40" value="localhost">-->
+            <td>
+                <table
+                    style="background-color: rgba(68, 68, 68, 0.76); text-align: center; padding: 20px; border-radius: 25px; border: 2px solid white;"
+                    align="center">
+                    <tr>
+                        <td style="text-align: right; width:40%">Hostname:</td>
+                        <td style="text-align: left"><input id="hostname" type='text' class="login" size="40"
+                                value="archipelago.gg"></td>
+                        <!--<td style="text-align: left"><input id="hostname" type='text' class="login" size="40" value="localhost">-->
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Port:</td>
+                        <td style="text-align: left"><input id="port" type='text' class="login" size="40" value="38281">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Game Name:</td>
+                        <td style="text-align: left"><input id="game" type='text' class="login" size="40"
+                                value="Manual_{Game}_{Creator}" disabled></td>
+                        <!--<td style="text-align: left"><input id="game" type='text' class="login" size="40"
+                                value="Manual_MarvelSNAP_JHobz"></td>-->
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Player Name:</td>
+                        <td style="text-align: left">
+                            <input id="player" type='text' class="login" size="40" value="Player 1">
+                            <!--<input id="player" type='text' class="login" size="40" value="REpsilonSNAP">-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Load APWorld for Styling & Game Autofill<br>
+                            From Local File: <input type="file" id="style" name="style"><br>
+                            <!--From URL: <input type="text" id="styleURL" name="styleURL"><button
+                                onclick="loadFromURL()">Load From
+                                URL</button>--><!-- Revisit Later -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button onclick="connect()" style="width: 300px;">Connect</button>
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         <tr>
-            <td style="text-align: right">Port:</td>
-            <td style="text-align: left"><input id="port" type='text' class="login" size="40" value="38281"></td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Game Name:</td>
-            <td style="text-align: left"><input id="game" type='text' class="login" size="40"
-                    value="Manual_{Game}_{Creator}" disabled></td>
-            <!--<td style="text-align: left"><input id="game" type='text' class="login" size="40"
-                    value="Manual_MarvelSNAP_JHobz"></td>-->
-        </tr>
-        <tr>
-            <td style="text-align: right">Player Name:</td>
-            <td style="text-align: left">
-                <input id="player" type='text' class="login" size="40" value="Player 1">
-                <!--<input id="player" type='text' class="login" size="40" value="REpsilonSNAP">-->
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                Load APWorld for Styling & Game Autofill: <input type="file" id="style" name="style">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <button onclick="connect()" style="width: 300px;">Connect</button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
+            <td>
                 <div id="err" style="background-color: red;"></div>
             </td>
         </tr>

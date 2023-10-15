@@ -1,12 +1,10 @@
-var versionTag = "Archipelago Web Client v0.4.3 Build 20231014";
+var versionTag = "Archipelago Web Client v0.4.3 Build 20231015 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
 
 document.getElementById('buildText').innerHTML = versionTag;
 
 document.getElementById('changelog').innerHTML = `<h3>Changes to ` + versionTag + `</h3>
 <ul>
-<li>Changed login to require APworld for styling and to address bugs.</li>
-<li>Changed game input field to be disabled. Obtains information from apworld.</li>
-<li>Changed view of disabled fields to allow for easier reading.</li>
+<li>Added styling to the entire app. (Custom apworld backgrounds will still overwrite this.)</li>
 </ul>
 <h4>Upcoming Changes</h4>
 <ul>

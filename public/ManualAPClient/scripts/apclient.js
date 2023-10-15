@@ -1,8 +1,8 @@
 //Background
 if (sessionStorage.getItem('background')) {
-    document.body.style.backgroundImage = "url(" + sessionStorage.getItem('background') + ")";
-    document.body.style.backgroundRepeat = 'no-repeat';
-    document.body.style.backgroundSize = "auto 100vh";
+    document.documentElement.style.backgroundImage = "url(" + sessionStorage.getItem('background') + ")";
+    document.documentElement.style.backgroundRepeat = 'no-repeat';
+    document.documentElement.style.backgroundSize = "auto 100vh";
 }
 
 //Arrays for info from server
