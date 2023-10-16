@@ -5,6 +5,7 @@ document.getElementById('buildText').innerHTML = versionTag;
 document.getElementById('changelog').innerHTML = `<h3>Changes to ` + versionTag + `</h3>
 <ul>
 <li>Added styling to the entire app. (Custom apworld backgrounds will still overwrite this.)</li>
+<li>Added toggle for custom backgrounds with a tooltip description.</li>
 </ul>
 <h4>Upcoming Changes</h4>
 <ul>

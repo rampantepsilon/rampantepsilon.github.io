@@ -100,9 +100,14 @@ $("#style").on("change", function (evt) {
                             console.log('true')
                             document.getElementById('game').value = "Manual_" + gameTemp['game'] + gameTemp['player'];
                         }
-                        if (gameTemp['background-image']) {
-                            document.html.style.backgroundImage = "url(gameTemp['background-image'])";
-                            sessionStorage.setItem('background', gameTemp['background-image'])
+
+                        var bckgrndRadio = document.getElementsByName('bckgrnd');
+                        var checked = Array.from(bckgrndRadio).find((radio) => radio.checked);
+
+                        if (checked.value == 'yes') {
+                            if (gameTemp['background-image']) {
+                                sessionStorage.setItem('background', gameTemp['background-image'])
+                            }
                         }
                     })
             }
