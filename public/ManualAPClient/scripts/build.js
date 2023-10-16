@@ -2,7 +2,8 @@ var versionTag = "Archipelago Web Client v0.4.3 Build 20231015 Built by <a style
 
 document.getElementById('buildText').innerHTML = versionTag;
 
-document.getElementById('changelog').innerHTML = `<h3>Changes to ` + versionTag + `</h3>
+document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archipelago is not part of the main Archipelago. Any issues with the web client or manuals in general should be asked in the <a href='https://discord.gg/T5bcsVHByx' style='color:white'>Manual Archipelago Discord Server</a></h4>
+<h3>Changes to ` + versionTag + `</h3>
 <ul>
 <li>Added styling to the entire app. (Custom apworld backgrounds will still overwrite this.)</li>
 <li>Added toggle for custom backgrounds with a tooltip description.</li>
