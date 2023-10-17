@@ -39,25 +39,31 @@ client.addListener(SERVER_PACKET_TYPE.DATA_PACKAGE, (packet) => {
     var game = sessionStorage.getItem('game');
     var i = 0;
 
+    //Get location names
     for (i in packet["data"]["games"][game]['location_id_to_name']) {
         locationNames.push(packet["data"]["games"][game]['location_id_to_name'][i])
     }
 
+    //Get location IDs
     for (i in packet["data"]["games"][game]['location_name_to_id']) {
         locationIds.push(packet["data"]["games"][sessionStorage.getItem('game')]['location_name_to_id'][i])
     }
 
+    //Get Item Names
     for (i in packet["data"]["games"][game]['item_id_to_name']) {
         itemNames.push(packet["data"]["games"][sessionStorage.getItem('game')]['item_id_to_name'][i])
     }
 
+    //Get Item IDs
     for (i in packet["data"]["games"][game]['item_name_to_id']) {
         itemIds.push(packet["data"]["games"][sessionStorage.getItem('game')]['item_name_to_id'][i])
     }
 
+    //Add All found checks to display
     addToDisplay();
 })
 
+//Variable for styling items
 var styleSplit;
 
 function addToDisplay() {
@@ -67,13 +73,16 @@ function addToDisplay() {
     items.innerHTML = '';
     locationsPage.innerHTML = '';
 
+    //Get Unique Item Categories
     if (uniqueItems.length > 1) {
         for (var j = 0; j < uniqueItems.length; j++) {
+            //Setup Categories
             if (j == 0) {
                 items.innerHTML += "<div align='center' class='items' id='" + uniqueItems[j] + `' style='font-weight: bold;' onclick='itemCatClose("` + uniqueItems[j] + `")'>` + uniqueItems[j] + " (<span id='" + uniqueItems[j] + "2'>0</span>)</div><br>";
             } else {
                 items.innerHTML += "<br><div align='center' class='items' id='" + uniqueItems[j] + `' style='font-weight: bold;' onclick="itemCatClose('` + uniqueItems[j] + `')">` + uniqueItems[j] + " (<span id='" + uniqueItems[j] + "2'>0</span>)</div><br>";
             }
+            //Add Items to categories
             for (var i = 0; i < itemIds.length; i++) {
                 for (var k = 0; k < catCount[i]; k++) {
                     if (itemsList[i][k] == uniqueItems[j]) {
@@ -89,31 +98,39 @@ function addToDisplay() {
                 }
             }
         }
-    } else {
+    }
+    // Unused (Was used before APWorlds were required)
+    else {
         for (var i = 0; i < itemIds.length; i++) {
             items.innerHTML += "<div>" + itemNames[i] + " (<span class='itemCount' id='" + itemIds[i] + "'>0</span>)</div>";
         }
     }
 
+    //Get Location Unique Categories
     if (uniqueCat.length > 1) {
         for (var j = 0; j < uniqueCat.length; j++) {
+            //Set up Location Categories
             if (j == 0) {
                 locationsPage.innerHTML += `<div align='center' style='font-weight:bold' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + "</div><br>";
             } else {
                 locationsPage.innerHTML += `<br><div align='center' style='font-weight:bold' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + "</div><br>";
             }
+            //Add locations to categories
             for (var i = 0; i < locationIds.length; i++) {
                 if (locations[i] == uniqueCat[j]) {
                     locationsPage.innerHTML += "<div class='locations' id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' class='locations' data-vis='` + uniqueCat[j] + `'>` + locationNames[i] + "</div>";
                 }
             }
         }
-    } else {
+    }
+    //Unused (Was used before APWorlds were required)
+    else {
         for (var i = 0; i < locationIds.length; i++) {
             locationsPage.innerHTML += "<div id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' class='locations')">` + locationNames[i] + "</div>";
         }
     }
 
+    //Add listener for marking checks on the server
     document.querySelectorAll('.locations').forEach(el => el.addEventListener('click', event => {
         if (event.target.getAttribute('data-el') != locationIds[locationIds.length - 1]) {
             client.locations.check(parseInt(event.target.getAttribute('data-el')));
@@ -126,6 +143,7 @@ function addToDisplay() {
         document.getElementById(event.target.getAttribute('data-el')).style.display = 'none';
     }));
 
+    //Add listener to show items as found
     document.querySelectorAll('.itemsStyle').forEach(el => el.addEventListener('change', event => {
         var currentID = parseInt(event.target.getAttribute('data-id'));
         if (currentID != 0) {
@@ -133,8 +151,10 @@ function addToDisplay() {
         }
     }))
 
+    //Listener for marking items as used in the tracker (Not all games support this)
     document.querySelectorAll('.itemsStyle').forEach(el => el.addEventListener('click', changeColor));
 
+    //Call to close all location categories
     for (var i = 0; i < uniqueCat.length; i++) {
         locCatClose(uniqueCat[i]);
     }
@@ -143,12 +163,13 @@ function addToDisplay() {
 //Mark Received Items
 client.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (packet) => {
     var packetItems = packet.items;
-    console.log(packetItems)
 
+    //Parse items and locations
     for (var i = 0; i < packetItems.length; i++) {
         var receivedItem = packetItems[i]['item'];
         var receivedLocation = packetItems[i]['location'];
 
+        //Show items received upon connection
         for (var j = 0; j < document.getElementsByClassName(receivedItem).length; j++) {
             var currentCount = parseInt(document.getElementsByClassName(receivedItem)[j].innerHTML);
             document.getElementsByClassName(receivedItem)[j].innerHTML = currentCount + 1;
@@ -159,18 +180,23 @@ client.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (packet) => {
             }
         }
 
+        //Mark locations as found when connecting (based on items in own world)
         if (document.getElementById(receivedLocation)) {
             document.getElementById(receivedLocation).style.display = 'none';
         }
     }
+
+    //Mark locations as found when connecting (any other locations)
     for (var i = 0; i < checkedLocations.length; i++) {
         var receivedLocation2 = checkedLocations[i];
         document.getElementById(receivedLocation2).style.display = 'none';
     }
 
+    //Give player category count (doesn't do total items yet)
     itemCounter();
 })
 
+//Listen for chat activity from player
 document.getElementById('chatBox').addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
         client.say($("#chatBox").val())
@@ -182,6 +208,7 @@ document.getElementById('chatBox').addEventListener("keypress", function (event)
 client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
     var newMessage;
 
+    //Determine newMessage depending on chat message or server message
     if (packet['type'] == 'Chat') {
         newMessage = packet['data'][0]['text'];
     } else {
@@ -193,6 +220,7 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
         var splitMsg = newMessage.split(sessionStorage.getItem('player'))
         var remMessage = splitMsg[1];
 
+        //Handle coding depending on where player's name is
         if (newMessage.indexOf(sessionStorage.getItem('player')) == 0) {
             newMessage = `<span style="color: rgb(0, 173, 145);">` + sessionStorage.getItem('player') + `</span>` + remMessage;
             if (splitMsg[2]) {
@@ -215,6 +243,7 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
         }
     }
 
+    //Return message to player
     var oldmsg = document.getElementById('log').innerHTML;
     document.getElementById('log').innerHTML = "<div class='textMsg'>" + newMessage + "</div>" + oldmsg + "";
 });

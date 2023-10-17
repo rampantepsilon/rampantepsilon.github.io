@@ -180,6 +180,7 @@ function liveSearch() {
     }
 }
 
+//Filter Items Scripting (by category)
 function itemSearch() {
     // Locate the card elements
     let cards = document.querySelectorAll('.items')
@@ -200,6 +201,7 @@ function itemSearch() {
     }
 }
 
+//Close & Open Item Cateorgies by clicking
 function itemCatClose(category) {
     // Locate the card elements
     let cards = document.querySelectorAll('.items')
@@ -222,6 +224,7 @@ function itemCatClose(category) {
     }
 }
 
+//Close & Open Location Categories by clicking
 function locCatClose(category) {
     // Locate the card elements
     let cards = document.querySelectorAll('.locations')
@@ -242,6 +245,7 @@ function locCatClose(category) {
     }
 }
 
+//Change color when clicking on an item
 function changeColor() {
     if (!this.style.backgroundColor) {
         this.style.backgroundColor = 'red';
