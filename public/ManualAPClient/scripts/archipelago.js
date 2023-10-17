@@ -4,7 +4,7 @@ import {
     SERVER_PACKET_TYPE,
     CLIENT_PACKET_TYPE,
     LocationsManager,
-} from "https://unpkg.com/archipelago.js@1.0.0/dist/archipelago.js";
+} from "../scripts/archipelago.js@1.0.0.js";
 
 // Create a new Archipelago client
 const client = new Client();
@@ -98,13 +98,13 @@ function addToDisplay() {
     if (uniqueCat.length > 1) {
         for (var j = 0; j < uniqueCat.length; j++) {
             if (j == 0) {
-                locationsPage.innerHTML += "<div align='center' style='font-weight:bold'>" + uniqueCat[j] + "</div><br>";
+                locationsPage.innerHTML += `<div align='center' style='font-weight:bold' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + "</div><br>";
             } else {
-                locationsPage.innerHTML += "<br><div align='center' style='font-weight:bold'>" + uniqueCat[j] + "</div><br>";
+                locationsPage.innerHTML += `<br><div align='center' style='font-weight:bold' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + "</div><br>";
             }
             for (var i = 0; i < locationIds.length; i++) {
                 if (locations[i] == uniqueCat[j]) {
-                    locationsPage.innerHTML += "<div id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' class='locations'>` + locationNames[i] + "</div>";
+                    locationsPage.innerHTML += "<div class='locations  id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' class='locations' data='` + uniqueCat[j] + `'>` + locationNames[i] + "</div>";
                 }
             }
         }
@@ -134,6 +134,10 @@ function addToDisplay() {
     }))
 
     document.querySelectorAll('.itemsStyle').forEach(el => el.addEventListener('click', changeColor));
+
+    for (var i = 0; i < uniqueCat.length; i++) {
+        locCatClose(uniqueCat[i]);
+    }
 }
 
 //Mark Received Items
