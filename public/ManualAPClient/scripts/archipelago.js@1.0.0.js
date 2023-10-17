@@ -565,15 +565,15 @@ class x {
     if (e2.port < 1 || e2.port > 65535 || !Number.isInteger(e2.port))
       throw new Error(`Port must be an integer between 1 and 65535. Received: ${e2.port}`);
     try {
-      if (__privateSet(this, _C, A.CONNECTING), "ws" === e2.protocol)
+      if (__privateSet(this, _C, A.CONNECTING), "wss" === e2.protocol)
         await __privateMethod(this, _w, w_fn).call(this, `wss://${e2.hostname}:${e2.port}/`);
-      else if ("wss" === e2.protocol)
-        await __privateMethod(this, _w, w_fn).call(this, `wss://${e2.hostname}:${e2.port}/`);
+      else if ("ws" === e2.protocol)
+        await __privateMethod(this, _w, w_fn).call(this, `ws://${e2.hostname}:${e2.port}/`);
       else
         try {
           await __privateMethod(this, _w, w_fn).call(this, `wss://${e2.hostname}:${e2.port}/`);
         } catch {
-          await __privateMethod(this, _w, w_fn).call(this, `wss://${e2.hostname}:${e2.port}/`);
+          await __privateMethod(this, _w, w_fn).call(this, `ws://${e2.hostname}:${e2.port}/`);
         }
       return await new Promise((t2, n2) => {
         const i2 = () => {

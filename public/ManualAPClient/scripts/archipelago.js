@@ -104,7 +104,7 @@ function addToDisplay() {
             }
             for (var i = 0; i < locationIds.length; i++) {
                 if (locations[i] == uniqueCat[j]) {
-                    locationsPage.innerHTML += "<div class='locations  id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' class='locations' data='` + uniqueCat[j] + `'>` + locationNames[i] + "</div>";
+                    locationsPage.innerHTML += "<div class='locations' id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' class='locations' data-vis='` + uniqueCat[j] + `'>` + locationNames[i] + "</div>";
                 }
             }
         }
@@ -143,6 +143,7 @@ function addToDisplay() {
 //Mark Received Items
 client.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (packet) => {
     var packetItems = packet.items;
+    console.log(packetItems)
 
     for (var i = 0; i < packetItems.length; i++) {
         var receivedItem = packetItems[i]['item'];

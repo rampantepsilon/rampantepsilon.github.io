@@ -230,7 +230,7 @@ function locCatClose(category) {
     // Loop through the cards
     for (var i = 0; i < cards.length; i++) {
         // If the text is within the card...
-        if (cards[i].getAttribute('data').toLowerCase()
+        if (cards[i].getAttribute('data-vis').toLowerCase()
             // ...and the text matches the search query...
             .includes(search_query.toLowerCase())) {
             if (cards[i].classList.contains('is-hidden')) {
