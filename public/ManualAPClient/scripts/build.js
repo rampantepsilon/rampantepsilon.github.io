@@ -7,6 +7,7 @@ document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archip
 <ul>
 <li>Added Documentation to the code.</li>
 <li>Added ability to only show categories as desired.</li>
+<li>Added Count to location categories.</li>
 </ul>
 <h4>Upcoming Changes</h4>
 <ul>
