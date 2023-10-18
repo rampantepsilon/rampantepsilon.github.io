@@ -150,6 +150,28 @@ function itemCounter() {
     }
 }
 
+function catCounter() {
+    if (document.getElementById(uniqueCat[0] + '2')) {
+        for (var i = 0; i < uniqueCat.length; i++) {
+            var styleSplit = uniqueCat[i].split(' ');
+            var styleCombine = '';
+
+            for (var l = 0; l < styleSplit.length; l++) {
+                styleCombine += styleSplit[l];
+            }
+
+            var parseName = '.' + styleCombine;
+            var visible = 0;
+            for (var k = 0; k < $(parseName).length; k++) {
+                if (!document.getElementsByClassName(styleCombine)[k].getAttribute('style')) {
+                    visible += 1;
+                }
+            }
+            document.getElementById(uniqueCat[i] + '2').innerHTML = visible;
+        }
+    }
+}
+
 function reload() {
     window.location.href = './apclient.html'
 }

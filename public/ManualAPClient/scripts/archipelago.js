@@ -111,14 +111,20 @@ function addToDisplay() {
         for (var j = 0; j < uniqueCat.length; j++) {
             //Set up Location Categories
             if (j == 0) {
-                locationsPage.innerHTML += `<div align='center' style='font-weight:bold' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + "</div><br>";
+                locationsPage.innerHTML += `<div align='center' style='font-weight:bold' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + " (<span id='" + uniqueCat[j] + "2'>0</span>)</div><br>";
             } else {
-                locationsPage.innerHTML += `<br><div align='center' style='font-weight:bold' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + "</div><br>";
+                locationsPage.innerHTML += `<br><div align='center' style='font-weight:bold' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + " (<span id='" + uniqueCat[j] + "2'>0</span>)</div><br>";
             }
             //Add locations to categories
             for (var i = 0; i < locationIds.length; i++) {
+                var splitStyle = uniqueCat[j].split(' ');
+                var combineStyle = '';
+                for (var l = 0; l < splitStyle.length; l++) {
+                    combineStyle += splitStyle[l]
+                }
+
                 if (locations[i] == uniqueCat[j]) {
-                    locationsPage.innerHTML += "<div class='locations' id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' class='locations' data-vis='` + uniqueCat[j] + `'>` + locationNames[i] + "</div>";
+                    locationsPage.innerHTML += "<div class='locations " + combineStyle + "' id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' class='locations' data-vis='` + uniqueCat[j] + `'>` + locationNames[i] + "</div>";
                 }
             }
         }
@@ -129,6 +135,8 @@ function addToDisplay() {
             locationsPage.innerHTML += "<div id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' class='locations')">` + locationNames[i] + "</div>";
         }
     }
+
+    catCounter();
 
     //Add listener for marking checks on the server
     document.querySelectorAll('.locations').forEach(el => el.addEventListener('click', event => {
@@ -155,9 +163,11 @@ function addToDisplay() {
     document.querySelectorAll('.itemsStyle').forEach(el => el.addEventListener('click', changeColor));
 
     //Call to close all location categories
-    for (var i = 0; i < uniqueCat.length; i++) {
-        locCatClose(uniqueCat[i]);
-    }
+    setTimeout(() => {
+        for (var i = 0; i < uniqueCat.length; i++) {
+            locCatClose(uniqueCat[i]);
+        }
+    }, 500)
 }
 
 //Mark Received Items
@@ -194,6 +204,7 @@ client.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (packet) => {
 
     //Give player category count (doesn't do total items yet)
     itemCounter();
+    catCounter();
 })
 
 //Listen for chat activity from player
