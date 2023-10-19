@@ -10,6 +10,7 @@ if (sessionStorage.getItem('game')) {
 if (sessionStorage.getItem('player')) {
     document.getElementById('player').value = sessionStorage.getItem('player');
 }
+
 function connect() {
     var host = document.getElementById('hostname').value;
     var port = document.getElementById('port').value;
@@ -51,116 +52,178 @@ function complete(host, port, game, player) {
     window.location.href = './apclient.html'
 }
 
-/*Revisit later
-function loadFromURL() {
-    var zip = new JSZip();
-    var apworldURL = document.getElementById('styleURL').value;
-
-    JSZipUtils.getBinaryContent(apworldURL, function (err, data) {
-        if (err) {
-            throw err;
-        }
-
-        JSZip.loadAsync(data).then(function (zip) {
-            console.log(zip.files);
-        })
-    })
-}
-*/
-
 //Allow grouping from APWorld
 $("#style").on("change", function (evt) {
-    var zip = new JSZip();
+    if (document.getElementById('style').value.includes('.zip')) {
+        var zip = new JSZip();
 
-    zip.loadAsync(this.files[0])
-        .then(function (zip) {
-            var fileList = [];
-            for (let [filename, file] of Object.entries(zip.files)) {
-                fileList.push(filename);
-            }
+        zip.loadAsync(this.files[0])
+            .then(function (zip) {
+                var fileList = [];
+                for (let [filename, file] of Object.entries(zip.files)) {
+                    fileList.push(filename);
+                }
 
-            var rootDir = fileList[0].substring(0, fileList[0].indexOf('/'));
+                var rootDir = fileList[0].substring(0, fileList[0].indexOf('/'));
 
-            const file_locations = zip.file(rootDir + `/data/locations.json`);
-            const file_items = zip.file(rootDir + `/data/items.json`);
-            const game_name = zip.file(rootDir + `/data/game.json`);
+                const file_locations = zip.file(rootDir + `/data/locations.json`);
+                const file_items = zip.file(rootDir + `/data/items.json`);
+                const game_name = zip.file(rootDir + `/data/game.json`);
 
-            if (game_name) {
-                game_name.async('string')
-                    .then((content) => {
-                        var gameTemp = JSON.parse(content);
-                        if (gameTemp['creator']) {
-                            document.getElementById('game').value = "Manual_" + gameTemp['game'] + "_" + gameTemp['creator'];
-                        }
-                        if (gameTemp['player']) {
-                            document.getElementById('game').value = "Manual_" + gameTemp['game'] + "_" + gameTemp['player'];
-                        }
-                        //Override for Manual_SMOFestival
-                        if (gameTemp['game'] == "SMO" && gameTemp['player']) {
-                            console.log('true')
-                            document.getElementById('game').value = "Manual_" + gameTemp['game'] + gameTemp['player'];
-                        }
-
-                        var bckgrndRadio = document.getElementsByName('bckgrnd');
-                        var checked = Array.from(bckgrndRadio).find((radio) => radio.checked);
-
-                        if (checked.value == 'yes') {
-                            if (gameTemp['background-image']) {
-                                sessionStorage.setItem('background', gameTemp['background-image'])
+                if (game_name) {
+                    game_name.async('string')
+                        .then((content) => {
+                            var gameTemp = JSON.parse(content);
+                            if (gameTemp['creator']) {
+                                document.getElementById('game').value = "Manual_" + gameTemp['game'] + "_" + gameTemp['creator'];
                             }
-                        }
-                    })
-            }
-
-            if (file_locations) {
-                file_locations.async('string')
-                    .then((content) => {
-                        var locationTemp = JSON.parse(content);
-                        var locationsTemp = [];
-                        var uniqueCatTemp = [];
-
-                        for (var i = 0; i < locationTemp.length; i++) {
-                            locationsTemp.push(locationTemp[i]['category'][0]);
-                            if (!uniqueCatTemp.includes(locationsTemp[i])) {
-                                uniqueCatTemp.push(locationsTemp[i]);
+                            if (gameTemp['player']) {
+                                document.getElementById('game').value = "Manual_" + gameTemp['game'] + "_" + gameTemp['player'];
                             }
-                        }
+                            //Override for Manual_SMOFestival
+                            if (gameTemp['game'] == "SMO" && gameTemp['player']) {
+                                console.log('true')
+                                document.getElementById('game').value = "Manual_" + gameTemp['game'] + gameTemp['player'];
+                            }
 
-                        sessionStorage.setItem('locations', locationsTemp);
-                        sessionStorage.setItem('uniqueCat', uniqueCatTemp);
-                    });
-            } else {
-                console.log("An error has occurred.")
-            }
+                            var bckgrndRadio = document.getElementsByName('bckgrnd');
+                            var checked = Array.from(bckgrndRadio).find((radio) => radio.checked);
 
-            if (file_items) {
-                file_items.async('string')
-                    .then((content) => {
-                        var itemTemp = JSON.parse(content);
-                        var itemsTemp = [];
-                        var uniqueItemTemp = [];
-                        var itemCatCount = [];
-
-                        for (var i = 0; i < itemTemp.length; i++) {
-                            var itemsMultiTemp = [];
-
-                            itemCatCount.push(itemTemp[i]['category'].length);
-
-                            for (var j = 0; j < itemTemp[i]['category'].length; j++) {
-                                itemsMultiTemp.push(itemTemp[i]['category'][j])
-                                if (!uniqueItemTemp.includes(itemTemp[i]['category'][j])) {
-                                    uniqueItemTemp.push(itemTemp[i]['category'][j]);
+                            if (checked.value == 'yes') {
+                                if (gameTemp['background-image']) {
+                                    sessionStorage.setItem('background', gameTemp['background-image'])
                                 }
                             }
-                            itemsTemp.push(itemsMultiTemp);
-                        }
-                        itemsTemp.push('Game Filler');
-                        uniqueItemTemp.push('Game Filler');
+                        })
+                }
 
-                        sessionStorage.setItem('items', itemsTemp);
-                        sessionStorage.setItem('uniqueItems', uniqueItemTemp);
-                        sessionStorage.setItem('count', itemCatCount);
-                    })
-            }
-        })
+                if (file_locations) {
+                    file_locations.async('string')
+                        .then((content) => {
+                            var locationTemp = JSON.parse(content);
+                            var locationsTemp = [];
+                            var uniqueCatTemp = [];
+
+                            for (var i = 0; i < locationTemp.length; i++) {
+                                locationsTemp.push(locationTemp[i]['category'][0]);
+                                if (!uniqueCatTemp.includes(locationsTemp[i])) {
+                                    uniqueCatTemp.push(locationsTemp[i]);
+                                }
+                            }
+
+                            sessionStorage.setItem('locations', locationsTemp);
+                            sessionStorage.setItem('uniqueCat', uniqueCatTemp);
+                        });
+                } else {
+                    console.log("An error has occurred.")
+                }
+
+                if (file_items) {
+                    file_items.async('string')
+                        .then((content) => {
+                            var itemTemp = JSON.parse(content);
+                            var itemsTemp = [];
+                            var uniqueItemTemp = [];
+                            var itemCatCount = [];
+
+                            for (var i = 0; i < itemTemp.length; i++) {
+                                var itemsMultiTemp = [];
+
+                                itemCatCount.push(itemTemp[i]['category'].length);
+
+                                for (var j = 0; j < itemTemp[i]['category'].length; j++) {
+                                    itemsMultiTemp.push(itemTemp[i]['category'][j])
+                                    if (!uniqueItemTemp.includes(itemTemp[i]['category'][j])) {
+                                        uniqueItemTemp.push(itemTemp[i]['category'][j]);
+                                    }
+                                }
+                                itemsTemp.push(itemsMultiTemp);
+                            }
+                            itemsTemp.push('Game Filler');
+                            uniqueItemTemp.push('Game Filler');
+
+                            sessionStorage.setItem('items', itemsTemp);
+                            sessionStorage.setItem('uniqueItems', uniqueItemTemp);
+                            sessionStorage.setItem('count', itemCatCount);
+                        })
+                }
+            })
+    } else if (document.getElementById('style').value.includes('.apmanual')) {
+        const [file] = document.getElementById('style').files;
+        const reader = new FileReader()
+
+        reader.addEventListener(
+            "load",
+            () => {
+                //B64 Decryption
+                var decoded = JSON.parse(atob(reader.result));
+
+                //Set Game & Player Name
+                document.getElementById('game').value = decoded['game'];
+                document.getElementById('player').value = decoded['player_name'];
+                document.getElementById('player').disabled = true;
+
+                //Set Background
+                var bckgrndRadio = document.getElementsByName('bckgrnd');
+                var checked = Array.from(bckgrndRadio).find((radio) => radio.checked);
+                if (checked.value == 'yes') {
+                    if (decoded['background-image']) {
+                        sessionStorage.setItem('background', decoded['background-image'])
+                    }
+                }
+
+                //Get information JSONs
+                var locations = decoded['location_table'];
+                var items = decoded['item_table'];
+                parseInfo(locations, items);
+            },
+            false,
+        );
+
+        if (file) {
+            reader.readAsText(file);
+        }
+    }
 })
+
+function parseInfo(locations, items) {
+    console.log(locations);
+    //Location parser
+    var locationsTemp = [];
+    var uniqueCatTemp = [];
+
+    for (var i = 0; i < locations.length - 1; i++) {
+        locationsTemp.push(locations[i]['category'][0]);
+        if (!uniqueCatTemp.includes(locationsTemp[i])) {
+            uniqueCatTemp.push(locationsTemp[i]);
+        }
+    }
+
+    sessionStorage.setItem('locations', locationsTemp);
+    sessionStorage.setItem('uniqueCat', uniqueCatTemp);
+
+    //Item parser
+    var itemsTemp = [];
+    var uniqueItemTemp = [];
+    var itemCatCount = [];
+
+    for (var i = 0; i < items.length - 1; i++) {
+        var itemsMultiTemp = [];
+
+        itemCatCount.push(items[i]['category'].length);
+
+        for (var j = 0; j < items[i]['category'].length; j++) {
+            itemsMultiTemp.push(items[i]['category'][j])
+            if (!uniqueItemTemp.includes(items[i]['category'][j])) {
+                uniqueItemTemp.push(items[i]['category'][j]);
+            }
+        }
+        itemsTemp.push(itemsMultiTemp);
+    }
+    itemsTemp.push('Game Filler');
+    uniqueItemTemp.push('Game Filler');
+
+    sessionStorage.setItem('items', itemsTemp);
+    sessionStorage.setItem('uniqueItems', uniqueItemTemp);
+    sessionStorage.setItem('count', itemCatCount);
+}

@@ -111,9 +111,9 @@ function addToDisplay() {
         for (var j = 0; j < uniqueCat.length; j++) {
             //Set up Location Categories
             if (j == 0) {
-                locationsPage.innerHTML += `<div align='center' style='font-weight:bold' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + " (<span id='" + uniqueCat[j] + "2'>0</span>)</div><br>";
+                locationsPage.innerHTML += `<div align='center' style='font-weight:bold; cursor: pointer;' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + " (<span id='" + uniqueCat[j] + "2'>0</span>)</div><br>";
             } else {
-                locationsPage.innerHTML += `<br><div align='center' style='font-weight:bold' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + " (<span id='" + uniqueCat[j] + "2'>0</span>)</div><br>";
+                locationsPage.innerHTML += `<br><div align='center' style='font-weight:bold; cursor: pointer;' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + " (<span id='" + uniqueCat[j] + "2'>0</span>)</div><br>";
             }
             //Add locations to categories
             for (var i = 0; i < locationIds.length; i++) {
@@ -124,7 +124,7 @@ function addToDisplay() {
                 }
 
                 if (locations[i] == uniqueCat[j]) {
-                    locationsPage.innerHTML += "<div class='locations " + combineStyle + "' id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' class='locations' data-vis='` + uniqueCat[j] + `'>` + locationNames[i] + "</div>";
+                    locationsPage.innerHTML += "<div class='locations " + combineStyle + "' id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' data-vis='` + uniqueCat[j] + `'>` + locationNames[i] + "</div>";
                 }
             }
         }
@@ -135,8 +135,6 @@ function addToDisplay() {
             locationsPage.innerHTML += "<div id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' class='locations')">` + locationNames[i] + "</div>";
         }
     }
-
-    catCounter();
 
     //Add listener for marking checks on the server
     document.querySelectorAll('.locations').forEach(el => el.addEventListener('click', event => {
@@ -164,6 +162,7 @@ function addToDisplay() {
 
     //Call to close all location categories
     setTimeout(() => {
+        catCounter();
         for (var i = 0; i < uniqueCat.length; i++) {
             locCatClose(uniqueCat[i]);
         }
@@ -247,8 +246,15 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
         for (var i = 0; i < itemNames.length; i++) {
             if (newMessage.includes(itemNames[i])) {
                 if (newMessage.includes('found') || newMessage.includes('sent')) {
-                    var itemSplit = newMessage.split(itemNames[i])[1];
-                    newMessage = newMessage.substring(0, newMessage.indexOf(itemNames[i])) + `<span style="color: rgb(255, 94, 94);">` + itemNames[i] + `</span>` + itemSplit;
+                    var itemSplit = newMessage.split(itemNames[i]);
+                    newMessage = newMessage.substring(0, newMessage.indexOf(itemNames[i])) + `<span style="color: rgb(255, 94, 94);">` + itemNames[i] + `</span>`;
+                    for (var j = 1; j < itemSplit.length; j++) {
+                        if (j != itemSplit.length - 1) {
+                            newMessage += itemSplit[j] + itemNames[i]
+                        } else {
+                            newMessage += itemSplit[j]
+                        }
+                    }
                 }
             }
         }

@@ -262,12 +262,17 @@ div#locations {
     overflow: auto;
 }
 
+.items {
+    cursor: pointer;
+}
+
 .locations {
-    height: 30px;
     background-color: rgb(0, 119, 255);
     border: 1px solid white;
-    padding-top: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     text-align: center;
+    cursor: pointer;
 }
 
 .is-hidden {
@@ -275,12 +280,13 @@ div#locations {
 }
 
 .itemsStyle {
-    height: 30px;
     background-color: rgb(0, 173, 145);
     color: black;
     border: 1px solid white;
-    padding-top: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     text-align: center;
+    cursor: pointer;
 }
 
 /* The Modal (background) */

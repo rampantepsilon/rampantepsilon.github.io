@@ -9,6 +9,10 @@ document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archip
 <li>Added ability to only show categories as desired.</li>
 <li>Added Count to location categories.</li>
 </ul>
+<h4>Known Bugs</h4>
+<ul>
+<li>Issue with items not coloring properly and some locations acting like marked items</li>
+</ul>
 <h4>Upcoming Changes</h4>
 <ul>
 <li>Further formatting to clean up the appearance</li>
