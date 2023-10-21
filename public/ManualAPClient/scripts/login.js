@@ -54,7 +54,7 @@ function complete(host, port, game, player) {
 
 //Allow grouping from APWorld
 $("#style").on("change", function (evt) {
-    if (document.getElementById('style').value.includes('.zip')) {
+    if (document.getElementById('style').value.includes('.apworld')) {
         var zip = new JSZip();
 
         zip.loadAsync(this.files[0])
