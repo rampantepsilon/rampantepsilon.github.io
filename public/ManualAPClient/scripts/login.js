@@ -198,6 +198,8 @@ function parseInfo(locations, items) {
             uniqueCatTemp.push(locationsTemp[i]);
         }
     }
+    locationsTemp.push('Game Completion');
+    uniqueCatTemp.push('Game Completion');
 
     sessionStorage.setItem('locations', locationsTemp);
     sessionStorage.setItem('uniqueCat', uniqueCatTemp);
