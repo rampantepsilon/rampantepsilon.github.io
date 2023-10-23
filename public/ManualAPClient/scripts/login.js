@@ -210,17 +210,22 @@ function parseInfo(locations, items) {
     var itemCatCount = [];
 
     for (var i = 0; i < items.length - 1; i++) {
-        var itemsMultiTemp = [];
+        console.log(items[i]);
+        if (items[i]['name'] != 'Victory') {
+            var itemsMultiTemp = [];
 
-        itemCatCount.push(items[i]['category'].length);
+            var itemsCounter = items[i]['category'];
+            console.log(itemsCounter);
+            itemCatCount.push(itemsCounter.length);
 
-        for (var j = 0; j < items[i]['category'].length; j++) {
-            itemsMultiTemp.push(items[i]['category'][j])
-            if (!uniqueItemTemp.includes(items[i]['category'][j])) {
-                uniqueItemTemp.push(items[i]['category'][j]);
+            for (var j = 0; j < items[i]['category'].length; j++) {
+                itemsMultiTemp.push(items[i]['category'][j])
+                if (!uniqueItemTemp.includes(items[i]['category'][j])) {
+                    uniqueItemTemp.push(items[i]['category'][j]);
+                }
             }
+            itemsTemp.push(itemsMultiTemp);
         }
-        itemsTemp.push(itemsMultiTemp);
     }
     itemsTemp.push('Game Filler');
     uniqueItemTemp.push('Game Filler');
