@@ -139,8 +139,8 @@ $("#style").on("change", function (evt) {
                                 }
                                 itemsTemp.push(itemsMultiTemp);
                             }
-                            itemsTemp.push('Game Filler');
-                            uniqueItemTemp.push('Game Filler');
+                            itemsTemp.push('No Category');
+                            uniqueItemTemp.push('No Category');
 
                             sessionStorage.setItem('items', itemsTemp);
                             sessionStorage.setItem('uniqueItems', uniqueItemTemp);
@@ -187,7 +187,6 @@ $("#style").on("change", function (evt) {
 })
 
 function parseInfo(locations, items) {
-    console.log(locations);
     //Location parser
     var locationsTemp = [];
     var uniqueCatTemp = [];
@@ -210,12 +209,10 @@ function parseInfo(locations, items) {
     var itemCatCount = [];
 
     for (var i = 0; i < items.length - 1; i++) {
-        console.log(items[i]);
         if (items[i]['name'] != 'Victory') {
             var itemsMultiTemp = [];
 
             var itemsCounter = items[i]['category'];
-            console.log(itemsCounter);
             itemCatCount.push(itemsCounter.length);
 
             for (var j = 0; j < items[i]['category'].length; j++) {
@@ -227,8 +224,8 @@ function parseInfo(locations, items) {
             itemsTemp.push(itemsMultiTemp);
         }
     }
-    itemsTemp.push('Game Filler');
-    uniqueItemTemp.push('Game Filler');
+    itemsTemp.push('No Category');
+    uniqueItemTemp.push('No Category');
 
     sessionStorage.setItem('items', itemsTemp);
     sessionStorage.setItem('uniqueItems', uniqueItemTemp);

@@ -34,7 +34,7 @@ function itemsListVar() {
         }
         itemsList.push(tempList);
     }
-    itemsList.push(["Game Filler"])
+    itemsList.push(["No Category"])
     catCount.push('1');
 }
 itemsListVar();
@@ -157,7 +157,7 @@ function catCounter() {
             var styleCombine = '';
 
             for (var l = 0; l < styleSplit.length; l++) {
-                styleCombine += styleSplit[l];
+                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '');
             }
 
             var parseName = '.' + styleCombine;

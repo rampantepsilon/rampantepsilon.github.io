@@ -120,7 +120,7 @@ function addToDisplay() {
                 var splitStyle = uniqueCat[j].split(' ');
                 var combineStyle = '';
                 for (var l = 0; l < splitStyle.length; l++) {
-                    combineStyle += splitStyle[l]
+                    combineStyle += splitStyle[l].replaceAll("[", '').replaceAll(']', '');
                 }
 
                 if (locations[i] == uniqueCat[j]) {
