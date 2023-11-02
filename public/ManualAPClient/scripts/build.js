@@ -1,11 +1,12 @@
-var versionTag = "Archipelago Web Client v0.4.3 Build 20231019 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
+var versionTag = "Archipelago Web Client v0.4.3 Build 20231102 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
 
 document.getElementById('buildText').innerHTML = versionTag;
 
 document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archipelago is not part of the main Archipelago. Any issues with the web client or manuals in general should be asked in the <a href='https://discord.gg/T5bcsVHByx' style='color:white'>Manual Archipelago Discord Server</a></h4>
 <h3>Changes to ` + versionTag + `</h3>
 <ul>
-<li>Added Base support for upcoming APMANUAL change for manuals.</li>
+<li>Fixed issue where Categories weren't behaving as intended. Counts not working. Some categories not closing after loading.</li>
+<li>Removed item coloring temporarily due to issues.</li>
 </ul>
 <h4>Known Bugs</h4>
 <ul>

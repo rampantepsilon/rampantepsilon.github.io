@@ -208,6 +208,8 @@ function parseInfo(locations, items) {
     var uniqueItemTemp = [];
     var itemCatCount = [];
 
+    console.log(items);
+
     for (var i = 0; i < items.length - 1; i++) {
         if (items[i]['name'] != 'Victory') {
             var itemsMultiTemp = [];
@@ -215,17 +217,27 @@ function parseInfo(locations, items) {
             var itemsCounter = items[i]['category'];
             itemCatCount.push(itemsCounter.length);
 
-            for (var j = 0; j < items[i]['category'].length; j++) {
-                itemsMultiTemp.push(items[i]['category'][j])
-                if (!uniqueItemTemp.includes(items[i]['category'][j])) {
-                    uniqueItemTemp.push(items[i]['category'][j]);
+            if (items[i]['category'].length == 0) {
+                itemsMultiTemp.push("No Category")
+                if (!uniqueItemTemp.includes("No Category")) {
+                    uniqueItemTemp.push("No Category");
                 }
+                itemsTemp.push(itemsMultiTemp);
+            } else {
+                for (var j = 0; j < items[i]['category'].length; j++) {
+                    itemsMultiTemp.push(items[i]['category'][j])
+                    if (!uniqueItemTemp.includes(items[i]['category'][j])) {
+                        uniqueItemTemp.push(items[i]['category'][j]);
+                    }
+                }
+                itemsTemp.push(itemsMultiTemp);
             }
-            itemsTemp.push(itemsMultiTemp);
         }
     }
     itemsTemp.push('No Category');
-    uniqueItemTemp.push('No Category');
+    if (!uniqueItemTemp.includes("No Category")) {
+        uniqueItemTemp.push('No Category');
+    }
 
     sessionStorage.setItem('items', itemsTemp);
     sessionStorage.setItem('uniqueItems', uniqueItemTemp);

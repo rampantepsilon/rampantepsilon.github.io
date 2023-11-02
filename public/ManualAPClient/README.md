@@ -1,4 +1,6 @@
 # Manual Archipelago Web Client
+NOTE: This project will only be for tracking and testing before going live on https://github.com/ManualForArchipelago/ManualClient
+
 Web client for Manual Archipelago worlds. (Replacement for the Manual AP Client)
 
 Hosted at https://rampantepsilon.github.io/ManualAPClient

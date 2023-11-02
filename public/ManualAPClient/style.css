@@ -6,6 +6,10 @@ html {
     background-size: 200px auto;
 }
 
+table {
+    font-size: calc(16px + 0.1vh);
+}
+
 .loginTitle {
     background-image: url('./img/ocean-header-night.png');
     background-position: center bottom;
@@ -18,6 +22,12 @@ html {
     left: -8px;
     position: relative;
     width: calc(100% - 45px);
+    height: 80px;
+}
+
+.textTitle {
+    font-size: 45px;
+    font-weight: bold;
 }
 
 .header {

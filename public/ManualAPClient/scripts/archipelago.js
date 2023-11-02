@@ -78,9 +78,9 @@ function addToDisplay() {
         for (var j = 0; j < uniqueItems.length; j++) {
             //Setup Categories
             if (j == 0) {
-                items.innerHTML += "<div align='center' class='items' id='" + uniqueItems[j] + `' style='font-weight: bold;' onclick='itemCatClose("` + uniqueItems[j] + `")'>` + uniqueItems[j] + " (<span id='" + uniqueItems[j] + "2'>0</span>)</div><br>";
+                items.innerHTML += "<div align='center' class='items' id='" + uniqueItems[j] + `' style='font-weight: bold;' onclick='itemCatClose("` + j + `")'>` + uniqueItems[j] + " (<span id='" + uniqueItems[j] + "2'>0</span>)</div><br>";
             } else {
-                items.innerHTML += "<br><div align='center' class='items' id='" + uniqueItems[j] + `' style='font-weight: bold;' onclick="itemCatClose('` + uniqueItems[j] + `')">` + uniqueItems[j] + " (<span id='" + uniqueItems[j] + "2'>0</span>)</div><br>";
+                items.innerHTML += "<br><div align='center' class='items' id='" + uniqueItems[j] + `' style='font-weight: bold;' onclick="itemCatClose('` + j + `')">` + uniqueItems[j] + " (<span id='" + uniqueItems[j] + "2'>0</span>)</div><br>";
             }
             //Add Items to categories
             for (var i = 0; i < itemIds.length; i++) {
@@ -111,20 +111,20 @@ function addToDisplay() {
         for (var j = 0; j < uniqueCat.length; j++) {
             //Set up Location Categories
             if (j == 0) {
-                locationsPage.innerHTML += `<div align='center' style='font-weight:bold; cursor: pointer;' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + " (<span id='" + uniqueCat[j] + "2'>0</span>)</div><br>";
+                locationsPage.innerHTML += `<div align='center' style='font-weight:bold; cursor: pointer;' onclick='locCatClose("` + j + `")'>` + uniqueCat[j] + " (<span id='locCat" + j + "'>0</span>)</div><br>";
             } else {
-                locationsPage.innerHTML += `<br><div align='center' style='font-weight:bold; cursor: pointer;' onclick='locCatClose("` + uniqueCat[j] + `")'>` + uniqueCat[j] + " (<span id='" + uniqueCat[j] + "2'>0</span>)</div><br>";
+                locationsPage.innerHTML += `<br><div align='center' style='font-weight:bold; cursor: pointer;' onclick='locCatClose("` + j + `")'>` + uniqueCat[j] + " (<span id='locCat" + j + "'>0</span>)</div><br>";
             }
             //Add locations to categories
             for (var i = 0; i < locationIds.length; i++) {
                 var splitStyle = uniqueCat[j].split(' ');
                 var combineStyle = '';
                 for (var l = 0; l < splitStyle.length; l++) {
-                    combineStyle += splitStyle[l].replaceAll("[", '').replaceAll(']', '');
+                    combineStyle += splitStyle[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "");
                 }
 
                 if (locations[i] == uniqueCat[j]) {
-                    locationsPage.innerHTML += "<div class='locations " + combineStyle + "' id='" + locationIds[i] + "' data-el='" + locationIds[i] + `' data-vis='` + uniqueCat[j] + `'>` + locationNames[i] + "</div>";
+                    locationsPage.innerHTML += `<div class="locations ` + combineStyle + `" id="` + locationIds[i] + `" data-el="` + locationIds[i] + `" data-vis="` + uniqueCat[j] + `">` + locationNames[i] + "</div>";
                 }
             }
         }
@@ -164,7 +164,7 @@ function addToDisplay() {
     setTimeout(() => {
         catCounter();
         for (var i = 0; i < uniqueCat.length; i++) {
-            locCatClose(uniqueCat[i]);
+            locCatClose(i);
         }
     }, 500)
 }
@@ -242,8 +242,8 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
                 newMessage += `<span style="color: rgb(0, 173, 145);">` + sessionStorage.getItem('player') + `</span>` + splitMsg[2];
             }
         }
-        //Item Color (WIP)
-        for (var i = 0; i < itemNames.length; i++) {
+        //Item Color (WIP) [TEMPORARILY DISABLED]
+        /*for (var i = 0; i < itemNames.length; i++) {
             if (newMessage.includes(itemNames[i])) {
                 if (newMessage.includes('found') || newMessage.includes('sent')) {
                     var itemSplit = newMessage.split(itemNames[i]);
@@ -257,7 +257,7 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
                     }
                 }
             }
-        }
+        }*/
     }
 
     //Return message to player

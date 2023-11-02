@@ -151,13 +151,13 @@ function itemCounter() {
 }
 
 function catCounter() {
-    if (document.getElementById(uniqueCat[0] + '2')) {
+    if (document.getElementById('locCat0')) {
         for (var i = 0; i < uniqueCat.length; i++) {
             var styleSplit = uniqueCat[i].split(' ');
             var styleCombine = '';
 
             for (var l = 0; l < styleSplit.length; l++) {
-                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '');
+                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "");
             }
 
             var parseName = '.' + styleCombine;
@@ -167,7 +167,7 @@ function catCounter() {
                     visible += 1;
                 }
             }
-            document.getElementById(uniqueCat[i] + '2').innerHTML = visible;
+            document.getElementById('locCat' + i).innerHTML = visible;
         }
     }
 }
@@ -228,14 +228,14 @@ function itemCatClose(category) {
     // Locate the card elements
     let cards = document.querySelectorAll('.items')
     // Locate the search input
-    let search_query = category;
+    let search_query = uniqueItems[category];
     // Loop through the cards
     for (var i = 0; i < cards.length; i++) {
         // If the text is within the card...
         if (cards[i].id.toLowerCase()
             // ...and the text matches the search query...
             .includes(search_query.toLowerCase())) {
-            if (cards[i].innerHTML.indexOf(category) != 0) {
+            if (cards[i].innerHTML.indexOf(uniqueItems[category]) != 0) {
                 if (cards[i].classList.contains('is-hidden')) {
                     cards[i].classList.remove("is-hidden");
                 } else {
@@ -251,7 +251,7 @@ function locCatClose(category) {
     // Locate the card elements
     let cards = document.querySelectorAll('.locations')
     // Locate the search input
-    let search_query = category;
+    let search_query = uniqueCat[category];
     // Loop through the cards
     for (var i = 0; i < cards.length; i++) {
         // If the text is within the card...
