@@ -17,30 +17,32 @@
         style="height: calc(97vh - 150px); background-color: rgba(68, 68, 68, 0.76); padding: 20px; border-radius: 25px; border: 2px solid white;">
         <tr>
             <td style="vertical-align: top; width: 25%">
-                <div id="items"></div>
+                <div class="checks" id="items"></div>
             </td>
             <td style="vertical-align: top; width: 25%">
-                <div id="locations"></div>
+                <div class='checks' id="locations"></div>
             </td>
-            <td style="vertical-align: top; width: calc(50%);">
+        </tr>
+        <tr>
+            <td colspan="2" style="vertical-align: top;">
                 <div id="log"></div>
             </td>
         </tr>
         <tr>
             <td colspan="3" align="right" style="height: 100px">
-                <!--Load APWorld for Styling: <input type="file" id="style" name="style">-->
-                Chat: <input type="text" id="chatBox" style="width: 45%;">
                 <table width="100%">
                     <tr>
-                        <td style="vertical-align: bottom; width: 25%" align="center">
+                        <!--<td style="vertical-align: bottom; width: 25%" align="center">
                             <label for="searchbox">Filter By Item Category</label><br>
                             <input type="search" oninput="itemSearch()" id="searchbox2">
-                        </td>
+                        </td>-->
                         <td style="vertical-align: bottom; width: 25%" align="center">
                             <label for="searchbox">Filter By Location</label><br>
                             <input type="search" oninput="liveSearch()" id="searchbox">
                         </td>
-                        <td style='vertical-align: bottom; text-align: right; width: 50%;'>
+                        <td style="vertical-align: bottom; width: 50%" align="center">Chat<br><input type="text"
+                                id="chatBox" style="width: 100%;"></td>
+                        <td style='vertical-align: bottom; text-align: right; width: 25%;'>
                             <div><button class="connButton" onclick="disconnect()">Disconnect</button></div>
                         </td>
                     </tr>

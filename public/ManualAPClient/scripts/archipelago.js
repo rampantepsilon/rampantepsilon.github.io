@@ -90,7 +90,7 @@ function addToDisplay() {
                         var styleCombine = '';
 
                         for (var l = 0; l < styleSplit.length; l++) {
-                            styleCombine += styleSplit[l];
+                            styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "");
                         }
 
                         items.innerHTML += "<span class='" + itemIds[i] + "2 " + styleCombine + "' style='display:none;'><div class='items itemsStyle' id='" + uniqueItems[j] + "' data-id='" + itemIds[i] + "'>" + itemNames[i] + " (<span class='" + itemIds[i] + "'>0</span>)</div></span>";
@@ -120,7 +120,7 @@ function addToDisplay() {
                 var splitStyle = uniqueCat[j].split(' ');
                 var combineStyle = '';
                 for (var l = 0; l < splitStyle.length; l++) {
-                    combineStyle += splitStyle[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "");
+                    combineStyle += splitStyle[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll('(', '').replaceAll(')', '');
                 }
 
                 if (locations[i] == uniqueCat[j]) {

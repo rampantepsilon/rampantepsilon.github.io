@@ -140,7 +140,7 @@ function itemCounter() {
             var styleCombine = '';
 
             for (var l = 0; l < styleSplit.length; l++) {
-                styleCombine += styleSplit[l];
+                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "");
             }
 
             var parseName = '.' + styleCombine + ":visible";
@@ -157,7 +157,7 @@ function catCounter() {
             var styleCombine = '';
 
             for (var l = 0; l < styleSplit.length; l++) {
-                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "");
+                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll('(', '').replaceAll(')', '');
             }
 
             var parseName = '.' + styleCombine;
