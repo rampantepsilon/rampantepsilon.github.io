@@ -1,22 +1,20 @@
-var versionTag = "Archipelago Web Client v0.4.3 Build 20231102 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
+var versionTag = "Archipelago Web Client v0.4.4 Build 20240116 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
 
 document.getElementById('buildText').innerHTML = versionTag;
 
 document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archipelago is not part of the main Archipelago. Any issues with the web client or manuals in general should be asked in the <a href='https://discord.gg/T5bcsVHByx' style='color:white'>Manual Archipelago Discord Server</a></h4>
 <h3>Changes to ` + versionTag + `</h3>
 <ul>
-<li>Fixed issue where Categories weren't behaving as intended. Counts not working. Some categories not closing after loading.</li>
-<li>Removed item coloring temporarily due to issues.</li>
+<li>Rework of backend to accomodate to the .APMANUAL files now provided with all Manual APs.</li>
+<li>Removed Deathlink tag when logging in. (Will probably bring this back once I look into Deathlink more.)</li>
+<li>Change the build to show 0.4.4 when connecting.</li>
+<li>Added Tag "ManualWeb" to show that it's the web client connecting.</li>
+<li>Added Color Coding for items and player names. (ALPHA VERSION) [Issues may exist.]</li>
 </ul>
-<h4>Known Bugs</h4>
+<h4>Known Issues</h4>
 <ul>
-<li>Issue with items not coloring properly and some locations acting like marked items</li>
-</ul>
-<h4>Upcoming Changes</h4>
-<ul>
-<li>Further formatting to clean up the appearance</li>
-<li>Hint Tracking</li>
-<li>Color Items based on type (Progression, Useful, Filler, Trap)
+<li>If two people are running the same Manual but different players, the tracker might "remove" checks from one of the players. The checks are not marked and you will need to use the Python tracker found in the Discord or server commands to release the check. (Issue is possibly fixed, but more testing is needed.</li>
+<li>Items changing color on click not functioning. Currently unsure as to why this is happening, but should be fixed in the next update.</li>
 </ul>`
 
 // Get the modal

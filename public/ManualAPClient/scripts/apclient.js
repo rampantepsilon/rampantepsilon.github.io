@@ -1,3 +1,19 @@
+//Disconnect
+function disconnect() {
+    sessionStorage.removeItem('locCat');
+    sessionStorage.removeItem('locNames');
+    sessionStorage.removeItem('locIDs');
+    sessionStorage.removeItem('uniqueLocCat');
+    sessionStorage.removeItem('itemCat');
+    sessionStorage.removeItem('itemNames');
+    sessionStorage.removeItem('itemIDs');
+    sessionStorage.removeItem('uniqueItemCat');
+    sessionStorage.removeItem('itemType');
+    sessionStorage.removeItem('background');
+
+    window.location.href = './index.html'
+}
+
 //Background
 if (sessionStorage.getItem('background')) {
     document.documentElement.style.backgroundImage = "url(" + sessionStorage.getItem('background') + ")";
@@ -5,175 +21,122 @@ if (sessionStorage.getItem('background')) {
     document.documentElement.style.backgroundSize = "auto 100vh";
 }
 
-//Arrays for info from server
-var locationIds = [];
-var locationNames = [];
-var itemIds = [];
-var itemNames = [];
+//Arrays for items & locations
+var locIDs = JSON.parse(sessionStorage.getItem('locIDs'));
+var locNames = JSON.parse(sessionStorage.getItem('locNames'));
+var locCat = JSON.parse(sessionStorage.getItem('locCat'));
+var uniqueLocCat = JSON.parse(sessionStorage.getItem('uniqueLocCat'));
+var itemIDs = JSON.parse(sessionStorage.getItem('itemIDs'));
+var itemNames = JSON.parse(sessionStorage.getItem('itemNames'));
+var itemCat = JSON.parse(sessionStorage.getItem('itemCat'));
+var uniqueItemCat = JSON.parse(sessionStorage.getItem('uniqueItemCat')).sort();
+var itemType = JSON.parse(sessionStorage.getItem('itemType'));
+uniqueItemCat.push("No Category");
+uniqueLocCat.push("No Category");
 
 //Tracking for Async resync
 var checkedLocations = [];
 
-//Sorting Arrays
-var locations = sessionStorage.getItem('locations').split(',');
-var uniqueCat = sessionStorage.getItem('uniqueCat').split(',');
-var itemsList = [];
-var uniqueItems = sessionStorage.getItem('uniqueItems').split(',').sort();
-var catCount = sessionStorage.getItem('count').split(',');
+//Layout Items
+var items = document.getElementById('items');
+items.innerHTML = '';
 
-function itemsListVar() {
-    var temp = sessionStorage.getItem('items').split(',');
-
-    var k = 0;
-
-    for (var j = 0; j < catCount.length; j++) {
-        var tempList = [];
-        for (var i = 0; i < catCount[j]; i++) {
-            tempList.push(temp[k])
-            k += 1;
-        }
-        itemsList.push(tempList);
+//Setup Categories
+for (i in uniqueItemCat) {
+    if (i == 0) {
+        items.innerHTML += "<div align='center' class='items' id='" + uniqueItemCat[i] + `' style='font-weight: bold;' onclick='itemCatClose("` + i + `")'>` + uniqueItemCat[i] + " (<span id='" + uniqueItemCat[i] + "2'>0</span>)</div><br>"
+    } else {
+        items.innerHTML += "<br><div align='center' class='items' id='" + uniqueItemCat[i] + `' style='font-weight: bold;' onclick='itemCatClose("` + i + `")'>` + uniqueItemCat[i] + " (<span id='" + uniqueItemCat[i] + "2'>0</span>)</div><br>";
     }
-    itemsList.push(["No Category"])
-    catCount.push('1');
-}
-itemsListVar();
+    //Add Items
+    for (j in itemNames) {
+        for (k in itemCat[j]) {
+            if (itemCat[j][k] == uniqueItemCat[i]) {
+                styleSplit = uniqueItemCat[i].split(' ');
+                var styleCombine = '';
 
-function disconnect() {
-    sessionStorage.removeItem('locations');
-    sessionStorage.removeItem('uniqueCat');
-    sessionStorage.removeItem('items');
-    sessionStorage.removeItem('uniqueItems');
-    sessionStorage.removeItem('background');
-
-    window.location.href = './index.html'
-}
-
-//Allow grouping from APWorld
-$("#style").on("change", function (evt) {
-    var zip = new JSZip();
-
-    zip.loadAsync(this.files[0])
-        .then(function (zip) {
-            var fileList = [];
-            for (let [filename, file] of Object.entries(zip.files)) {
-                fileList.push(filename);
-            }
-
-            var rootDir = fileList[0].substring(0, fileList[0].indexOf('/'));
-
-            const file_locations = zip.file(rootDir + `/data/locations.json`);
-            const file_items = zip.file(rootDir + `/data/items.json`);
-            const game_name = zip.file(rootDir + `/data/game.json`);
-
-            if (game_name) {
-                game_name.async('string')
-                    .then((content) => {
-                        var gameTemp = JSON.parse(content);
-                        if (gameTemp['background-image']) {
-                            document.body.style.backgroundImage = url(gameTemp['background-image']);
-                            sessionStorage.setItem('background', gameTemp['background-image'])
-                        }
-                    })
-            }
-
-            if (file_locations) {
-                file_locations.async('string')
-                    .then((content) => {
-                        var locationTemp = JSON.parse(content);
-                        var locationsTemp = [];
-                        var uniqueCatTemp = [];
-
-                        for (var i = 0; i < locationTemp.length; i++) {
-                            locationsTemp.push(locationTemp[i]['category'][0]);
-                            if (!uniqueCatTemp.includes(locationsTemp[i])) {
-                                uniqueCatTemp.push(locationsTemp[i]);
-                            }
-                        }
-
-                        sessionStorage.setItem('locations', locationsTemp);
-                        sessionStorage.setItem('uniqueCat', uniqueCatTemp);
-                    });
-            } else {
-                console.log("An error has occurred.")
-            }
-
-            if (file_items) {
-                file_items.async('string')
-                    .then((content) => {
-                        var itemTemp = JSON.parse(content);
-                        var itemsTemp = [];
-                        var uniqueItemTemp = [];
-                        var itemCatCount = [];
-
-                        for (var i = 0; i < itemTemp.length; i++) {
-                            var itemsMultiTemp = [];
-
-                            itemCatCount.push(itemTemp[i]['category'].length);
-
-                            for (var j = 0; j < itemTemp[i]['category'].length; j++) {
-                                itemsMultiTemp.push(itemTemp[i]['category'][j])
-                                if (!uniqueItemTemp.includes(itemTemp[i]['category'][j])) {
-                                    uniqueItemTemp.push(itemTemp[i]['category'][j]);
-                                }
-                            }
-                            itemsTemp.push(itemsMultiTemp);
-                        }
-                        itemsTemp.push('Game Filler');
-                        uniqueItemTemp.push('Game Filler');
-
-                        sessionStorage.setItem('items', itemsTemp);
-                        sessionStorage.setItem('uniqueItems', uniqueItemTemp);
-                        sessionStorage.setItem('count', itemCatCount);
-                    })
-            }
-        })
-    setTimeout(() => {
-        reload();
-    }, 500);
-})
-
-function itemCounter() {
-    if (document.getElementById(uniqueItems[0] + '2')) {
-        for (var i = 0; i < uniqueItems.length; i++) {
-            styleSplit = uniqueItems[i].split(' ');
-            var styleCombine = '';
-
-            for (var l = 0; l < styleSplit.length; l++) {
-                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "");
-            }
-
-            var parseName = '.' + styleCombine + ":visible";
-            var visible = $(parseName).length;
-            document.getElementById(uniqueItems[i] + '2').innerHTML = visible;
-        }
-    }
-}
-
-function catCounter() {
-    if (document.getElementById('locCat0')) {
-        for (var i = 0; i < uniqueCat.length; i++) {
-            var styleSplit = uniqueCat[i].split(' ');
-            var styleCombine = '';
-
-            for (var l = 0; l < styleSplit.length; l++) {
-                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll('(', '').replaceAll(')', '');
-            }
-
-            var parseName = '.' + styleCombine;
-            var visible = 0;
-            for (var k = 0; k < $(parseName).length; k++) {
-                if (!document.getElementsByClassName(styleCombine)[k].getAttribute('style')) {
-                    visible += 1;
+                for (var l = 0; l < styleSplit.length; l++) {
+                    styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "");
                 }
+
+                items.innerHTML += "<span class='itemCard " + itemIDs[j] + "2 " + styleCombine + "' style='display:none'><div class='items itemsStyle' id='" + uniqueItemCat[i] + "' data-id='" + itemIDs[j] + "'>" + itemNames[j] + " (<span class='" + itemIDs[j] + "'>0</span>)</div></span>"
             }
-            document.getElementById('locCat' + i).innerHTML = visible;
+        }
+    }
+    itemCatClose(i);
+}
+
+//Close & Open Item Cateorgies by clicking
+function itemCatClose(category) {
+    // Locate the card elements
+    let cards = document.querySelectorAll('.itemCard')
+    // Locate the search input
+    let search_query = uniqueItemCat[category].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "");
+    // Loop through the cards
+    for (var i = 0; i < cards.length; i++) {
+        var items = cards[i].className;
+        let regex = new RegExp(`\\s${search_query}`);
+        if (regex.test(items) == true) {
+            if (cards[i].classList.contains('is-hidden')) {
+                cards[i].classList.remove("is-hidden");
+            } else {
+                cards[i].classList.add("is-hidden");
+            }
         }
     }
 }
 
-function reload() {
-    window.location.href = './apclient.html'
+//Layout Checks
+var locDisplay = document.getElementById('locations');
+locDisplay.innerHTML = '';
+
+//console.log(locCat)
+
+//Setup Categories
+for (i in uniqueLocCat) {
+    if (i == 0) {
+        locDisplay.innerHTML += `<div align='center' style='font-weight:bold; cursor: pointer;' onclick='locCatClose("` + i + `")'>` + uniqueLocCat[i] + " (<span id='locCat" + i + "'>0</span>)</div><br>";
+    } else {
+        locDisplay.innerHTML += `<br><div align='center' style='font-weight:bold; cursor: pointer;' onclick='locCatClose("` + i + `")'>` + uniqueLocCat[i] + " (<span id='locCat" + i + "'>0</span>)</div><br>";
+    }
+    //Add Locations
+    for (j in locNames) {
+        for (k in locCat[j]) {
+            if (locCat[j][k] === uniqueLocCat[i]) {
+                var splitStyle = uniqueLocCat[i].split(' ');
+                var combineStyle = '';
+
+                for (var l = 0; l < splitStyle.length; l++) {
+                    combineStyle += splitStyle[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll('(', '').replaceAll(')', '');
+                }
+
+                var visTrigger = locCat[j][k].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("(", "").replaceAll(")", "");
+
+                locDisplay.innerHTML += `<div class='locations ` + combineStyle + `' id="` + locIDs[j] + `" data-el="` + locIDs[j] + `" data-vis="` + visTrigger + `">` + locNames[j] + "</div>";
+            }
+        }
+    }
+    locCatClose(i);
+}
+
+//Close & Open Location Categories by clicking
+function locCatClose(category) {
+    // Locate the card elements
+    let cards = document.querySelectorAll('.locations')
+    // Locate the search input
+    let search_query = uniqueLocCat[category].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("(", "").replaceAll(")", "");
+    // Loop through the cards
+    for (var i = 0; i < cards.length; i++) {
+        var items = cards[i].getAttribute('data-vis');
+        let regex = new RegExp(`^${search_query}$`);
+        if (regex.test(items) == true) {
+            if (cards[i].classList.contains('is-hidden')) {
+                cards[i].classList.remove("is-hidden");
+            } else {
+                cards[i].classList.add("is-hidden");
+            }
+        }
+    }
 }
 
 //Filter Location Scripting
@@ -223,51 +186,45 @@ function itemSearch() {
     }
 }
 
-//Close & Open Item Cateorgies by clicking
-function itemCatClose(category) {
-    // Locate the card elements
-    let cards = document.querySelectorAll('.items')
-    // Locate the search input
-    let search_query = uniqueItems[category];
-    // Loop through the cards
-    for (var i = 0; i < cards.length; i++) {
-        // If the text is within the card...
-        if (cards[i].id.toLowerCase()
-            // ...and the text matches the search query...
-            .includes(search_query.toLowerCase())) {
-            if (cards[i].innerHTML.indexOf(uniqueItems[category]) != 0) {
-                if (cards[i].classList.contains('is-hidden')) {
-                    cards[i].classList.remove("is-hidden");
-                } else {
-                    cards[i].classList.add("is-hidden");
+//Counter Scripting
+function catCounter() {
+    if (document.getElementById('locCat0')) {
+        for (var i = 0; i < uniqueLocCat.length; i++) {
+            var styleSplit = uniqueLocCat[i].split(' ');
+            var styleCombine = '';
+
+            for (var l = 0; l < styleSplit.length; l++) {
+                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll('(', '').replaceAll(')', '');
+            }
+
+            var parseName = '.' + styleCombine;
+            var visible = 0;
+            for (var k = 0; k < $(parseName).length; k++) {
+                if (!document.getElementsByClassName(styleCombine)[k].getAttribute('style')) {
+                    visible += 1;
                 }
             }
+            document.getElementById('locCat' + i).innerHTML = visible;
         }
     }
 }
+function itemCounter() {
+    if (document.getElementById(uniqueItemCat[0] + '2')) {
+        for (var i = 0; i < uniqueItemCat.length; i++) {
+            styleSplit = uniqueItemCat[i].split(' ');
+            var styleCombine = '';
 
-//Close & Open Location Categories by clicking
-function locCatClose(category) {
-    // Locate the card elements
-    let cards = document.querySelectorAll('.locations')
-    // Locate the search input
-    let search_query = uniqueCat[category];
-    // Loop through the cards
-    for (var i = 0; i < cards.length; i++) {
-        // If the text is within the card...
-        if (cards[i].getAttribute('data-vis').toLowerCase()
-            // ...and the text matches the search query...
-            .includes(search_query.toLowerCase())) {
-            if (cards[i].classList.contains('is-hidden')) {
-                cards[i].classList.remove("is-hidden");
-            } else {
-                cards[i].classList.add("is-hidden");
+            for (var l = 0; l < styleSplit.length; l++) {
+                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "");
             }
+
+            var parseName = '.' + styleCombine + ":visible";
+            var visible = $(parseName).length;
+            document.getElementById(uniqueItemCat[i] + '2').innerHTML = visible;
         }
     }
 }
 
-//Change color when clicking on an item
 function changeColor() {
     if (!this.style.backgroundColor) {
         this.style.backgroundColor = 'red';
