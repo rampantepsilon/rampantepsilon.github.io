@@ -34,6 +34,22 @@ var itemType = JSON.parse(sessionStorage.getItem('itemType'));
 uniqueItemCat.push("No Category");
 uniqueLocCat.push("No Category");
 
+//Patch to make Game Based Filler show
+for (i in itemCat) {
+    if (itemCat[i] == null) {
+        itemCat[i] = ["No Category"];
+    }
+}
+
+//Patch to show __Manual Game Complete__
+for (i in locCat) {
+    if (locCat[i] == null) {
+        locCat[i] = ["No Category"];
+    }
+}
+
+console.log(locNames, locCat, locIDs)
+
 //Tracking for Async resync
 var checkedLocations = [];
 
@@ -52,6 +68,15 @@ for (i in uniqueItemCat) {
     for (j in itemNames) {
         for (k in itemCat[j]) {
             if (itemCat[j][k] == uniqueItemCat[i]) {
+                styleSplit = uniqueItemCat[i].split(' ');
+                var styleCombine = '';
+
+                for (var l = 0; l < styleSplit.length; l++) {
+                    styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "");
+                }
+
+                items.innerHTML += "<span class='itemCard " + itemIDs[j] + "2 " + styleCombine + "' style='display:none'><div class='items itemsStyle' id='" + uniqueItemCat[i] + "' data-id='" + itemIDs[j] + "'>" + itemNames[j] + " (<span class='" + itemIDs[j] + "'>0</span>)</div></span>"
+            } else if (itemCat[j] == null) {
                 styleSplit = uniqueItemCat[i].split(' ');
                 var styleCombine = '';
 

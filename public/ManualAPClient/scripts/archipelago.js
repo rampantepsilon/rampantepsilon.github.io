@@ -69,7 +69,6 @@ client.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (packet) => {
     //Parse items and locations
     for (var i = 0; i < packetItems.length; i++) {
         var receivedItem = packetItems[i]['item'];
-        var receivedLocation = packetItems[i]['location'];
 
         //Show items received upon connection
         for (var j = 0; j < document.getElementsByClassName(receivedItem).length; j++) {
