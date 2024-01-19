@@ -291,7 +291,6 @@ function updateText() {
     }
 
     document.getElementById('hints').innerHTML = hintTxt;
-    console.log(hintTxt)
 }
 
 //Show/Hide Hints

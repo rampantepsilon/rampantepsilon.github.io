@@ -31,12 +31,14 @@ client.addListener(SERVER_PACKET_TYPE.CONNECTED, (packet) => {
     for (var i = 0; i < packet['checked_locations'].length; i++) {
         checkedLocations.push(packet['checked_locations'][i])
     }
+
+    setTimeout(() => {
+        console.log(client.items.received);
+    }, 500);
 });
 
 function getHints() {
     setTimeout(() => {
-        console.log(client.hints.mine);
-
         findingPlayer = [];
         receivingPlayer = [];
         hintLocation = [];
@@ -131,32 +133,92 @@ document.getElementById('chatBox').addEventListener("keypress", function (event)
 
 //Chat Log
 client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
+    console.log(packet);
     var testMessage = message;
 
     //Determine newMessage depending on chat message or server message
     if (packet['type'] == 'Chat') {
-        testMessage = packet['data'][0]['text'];
-    }
+        testMessage = packet['data'][0]['text'];//Color Code for player
+        let playerName = sessionStorage.getItem('player');
+        var playerReplace = "<span style='color: rgb(0, 173, 145);'>" + playerName + "</span>";
+        let playerRegex = new RegExp(`${playerName}`);
+        testMessage = testMessage.replace(playerRegex, playerReplace);
+    } else if (packet['type'] == 'Join') {
+        testMessage = packet['data'][0]['text'];//Color Code for player
+        let playerName = sessionStorage.getItem('player');
+        var playerReplace = "<span style='color: rgb(0, 173, 145);'>" + playerName + "</span>";
+        let playerRegex = new RegExp(`${playerName}`);
+        testMessage = testMessage.replace(playerRegex, playerReplace);
+    } else if (packet['type'] == 'ItemSend') {
+        var tempTxt = '';
 
-    //Color Code for player
-    let playerName = sessionStorage.getItem('player');
-    var playerReplace = "<span style='color: rgb(0, 173, 145);'>" + playerName + "</span>";
-    let playerRegex = new RegExp(`${playerName}`);
-    testMessage = testMessage.replace(playerRegex, playerReplace);
+        for (i in packet['data']) {
+            if (packet['data'][i]['type'] == 'player_id') {
+                tempTxt += "<span style='color: rgb(0, 173, 145);'>" + client.players.name(parseInt(packet['data'][i]['text'])) + "</span>";
+            } else if (packet['data'][i]['type'] == 'item_id') {
+                //Progression Items
+                if (packet['data'][i]['flags'] == '1') {
+                    tempTxt += "<span style='color:orange'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>"
+                }
 
-    //Color Code for item importance
-    for (i in itemNames) {
-        var progression = "<span style='color: orange'>" + itemNames[i] + "</span>";
-        var useful = "<span style='color:lightblue'>" + itemNames[i] + "</span>";
-        var filler = "<span style='color:yellow'>" + itemNames[i] + "</span>";
-        var itemRegex = new RegExp(`${itemNames[i]}`);
-        if (itemType[i] == 'Progression') {
-            testMessage = testMessage.replace(itemRegex, progression);
-        } else if (itemType[i] == 'Useful') {
-            testMessage = testMessage.replace(itemRegex, useful);
-        } else if (itemType[i] == 'Filler') {
-            testMessage = testMessage.replace(itemRegex, filler);
+                //Useful Items
+                if (packet['data'][i]['flags'] == '2') {
+                    tempTxt += "<span style='color:yellow'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>"
+                }
+
+                //Filler Items
+                if (packet['data'][i]['flags'] == '0') {
+                    tempTxt += "<span style='color:lightblue'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>"
+                }
+            } else if (packet['data'][i]['type'] == 'location_id') {
+                tempTxt += client.locations.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text']))
+            } else {
+                tempTxt += packet['data'][i]['text'];
+            }
         }
+        testMessage = tempTxt;
+    } else if (packet['type'] == 'Hint') {
+        var tempTxt = '';
+        var colorTemp = '';
+
+        for (i in packet['data']) {
+            if (packet['data'][i]['type'] == 'player_id') {
+                tempTxt += "<span style='color: rgb(0, 173, 145);'>" + client.players.name(parseInt(packet['data'][i]['text'])) + "</span>";
+            } else if (packet['data'][i]['type'] == 'item_id') {
+                //Progression Items
+                if (packet['data'][i]['flags'] == '1') {
+                    tempTxt += "<span style='color:orange'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
+                    colorTemp = '1';
+                }
+
+                //Useful Items
+                if (packet['data'][i]['flags'] == '2') {
+                    tempTxt += "<span style='color:yellow'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
+                    colorTemp = '2';
+                }
+
+                //Filler Items
+                if (packet['data'][i]['flags'] == '0') {
+                    tempTxt += "<span style='color:lightblue'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
+                    colorTemp = '0';
+                }
+            } else if (packet['data'][i]['type'] == 'location_id') {
+                if (colorTemp == '1') {
+                    tempTxt += "<span style='color:orange'>" + client.locations.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
+                }
+
+                if (colorTemp == '2') {
+                    tempTxt += "<span style='color:yellow'>" + client.locations.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
+                }
+
+                if (colorTemp == '0') {
+                    tempTxt += "<span style='color:lightblue'>" + client.locations.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
+                }
+            } else {
+                tempTxt += packet['data'][i]['text'];
+            }
+        }
+        testMessage = tempTxt;
     }
 
     //Return message to player

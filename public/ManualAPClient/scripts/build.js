@@ -6,6 +6,7 @@ document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archip
 <h3>Changes to ` + versionTag + `</h3>
 <ul>
 <li>Patch 20240119: Added starting works on Hint Display</li>
+<li>Patch 20240119: Change coloring method. Should be more stable now.</li>
 <li>HOTFIX (20240118): Fixed issue where game specific filler and __Manual Game Complete__ weren't showing properly.</li>
 <li>Rework of backend to accomodate to the .APMANUAL files now provided with all Manual APs.</li>
 <li>Removed Deathlink tag when logging in. (Will probably bring this back once I look into Deathlink more.)</li>
