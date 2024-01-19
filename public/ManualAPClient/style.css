@@ -257,7 +257,8 @@ input[type="file"]::file-selector-button:active {
     background-color: #e5e7eb;
 }
 
-div#log {
+div#log,
+div#hints {
     height: calc(99%);
     margin: 0;
     padding: 0;

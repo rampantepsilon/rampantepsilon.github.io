@@ -48,8 +48,6 @@ for (i in locCat) {
     }
 }
 
-console.log(locNames, locCat, locIDs)
-
 //Tracking for Async resync
 var checkedLocations = [];
 
@@ -260,5 +258,64 @@ function changeColor() {
     } else if (this.style.backgroundColor == 'red') {
         this.style.backgroundColor = 'rgb(0, 173, 145)';
         this.style.color = 'black'
+    }
+}
+
+//HINTS (WIP)//
+
+//Variables
+var findingPlayer = [];
+var receivingPlayer = [];
+var hintLocation = [];
+var hintItem = [];
+var hintFound = [];
+
+function updateText() {
+    var hintTxt = '';
+    /* Should look like
+    [Hint]: [receiving_player]'s [hintItem] is at [hintLocation] in [finding_player]'s World. (FOUND/NOT FOUND)
+    END*/
+    //vars just for text
+    var findTog = [];
+    for (k in hintFound) {
+        if (hintFound[k] == true) {
+            findTog.push("FOUND");
+        } else {
+            findTog.push("NOT FOUND");
+        }
+    }
+
+    //Parse Info into readable text
+    for (p in findingPlayer) {
+        hintTxt += `<div class='textMsg'>[Hint]: ` + receivingPlayer[p] + `'s ` + hintItem[p] + ` is at ` + hintLocation[p] + ` in ` + findingPlayer[p] + `'s World. (` + findTog[p] + `)</div>`
+    }
+
+    document.getElementById('hints').innerHTML = hintTxt;
+    console.log(hintTxt)
+}
+
+//Show/Hide Hints
+function showHide(field) {
+    var fields = ['items', 'locations', 'hints']
+    if (document.getElementById(field).style.display == 'none') {
+        for (i in fields) {
+            if (field != fields[i]) {
+                document.getElementById(fields[i]).style.width = '38vw';
+            }
+            if (field == fields[i]) {
+                document.getElementById(fields[i]).style.width = '20vw';
+            }
+        }
+        document.getElementById(field).style.display = 'block';
+    } else {
+        for (i in fields) {
+            if (field != fields[i]) {
+                document.getElementById(fields[i]).style.width = '38vw';
+            }
+            if (field == fields[i]) {
+                document.getElementById(fields[i]).style.width = '20vw';
+            }
+        }
+        document.getElementById(field).style.display = 'none';
     }
 }

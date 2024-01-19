@@ -33,6 +33,34 @@ client.addListener(SERVER_PACKET_TYPE.CONNECTED, (packet) => {
     }
 });
 
+function getHints() {
+    setTimeout(() => {
+        console.log(client.hints.mine);
+
+        findingPlayer = [];
+        receivingPlayer = [];
+        hintLocation = [];
+        hintItem = [];
+        hintFound = [];
+
+        for (i in client.hints.mine) {
+            findingPlayer.push(client.players.name(client.hints.mine[i]['finding_player']));
+            receivingPlayer.push(client.players.name(client.hints.mine[i]['receiving_player']));
+            hintLocation.push(client.locations.name(client.players.game(client.hints.mine[i]['finding_player']), client.hints.mine[i]['location']));
+            hintItem.push(client.items.name(client.players.game(client.hints.mine[i]['receiving_player']), client.hints.mine[i]["item"]));
+        }
+        for (j in client.hints.mine) {
+            switch (client.hints.mine[j]['found']) {
+                case (true):
+                    hintFound.push(true);
+                case (false):
+                    hintFound.push(false);
+            }
+        }
+        updateText();
+    }, 250);
+}
+
 //Add listener for marking checks on the server
 document.querySelectorAll('.locations').forEach(el => el.addEventListener('click', event => {
     if (event.target.getAttribute('data-el') != locIDs[locIDs.length - 1]) {
@@ -135,6 +163,9 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
     var newMessage = testMessage;
     var oldmsg = document.getElementById('log').innerHTML;
     document.getElementById('log').innerHTML = "<div class='textMsg'>" + newMessage + "</div>" + oldmsg + "";
+
+    //Update Hints
+    getHints();
 });
 
 // Connect to the Archipelago server
