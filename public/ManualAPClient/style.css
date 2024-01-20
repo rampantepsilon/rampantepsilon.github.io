@@ -348,7 +348,8 @@ div#locations {
     cursor: pointer;
 }
 
-.textMsg {
+.textMsg,
+.hintMsg {
     border: solid white 1px;
     background-color: #3f3f3f;
     padding: 7px;

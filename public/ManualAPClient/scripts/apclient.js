@@ -260,6 +260,24 @@ function changeColor() {
         this.style.color = 'black'
     }
 }
+function changeHintColor() {
+    if (!this.style.backgroundColor) {
+        this.setAttribute('databg', 'marked')
+        this.style.backgroundColor = 'red';
+        this.style.color = 'white'
+    } else if (this.getAttribute('databg') == 'default') {
+        this.setAttribute('databg', 'marked')
+        this.style.backgroundColor = 'red';
+        this.style.color = 'white'
+    } else if (this.getAttribute('databg') == 'marked') {
+        this.setAttribute('databg', 'default')
+        this.style.backgroundColor = 'rgb(63,63,63)';
+        this.style.color = 'white'
+    }
+}
+
+//Listener for marking items as used in the tracker (Not all games support this)
+document.querySelectorAll('.itemsStyle').forEach(el => el.addEventListener('click', changeColor));
 
 //HINTS (WIP)//
 
@@ -271,11 +289,13 @@ var hintItem = [];
 var hintFound = [];
 
 function updateText() {
+    document.getElementById('hints').innerHTML = '';
     var hintTxt = '';
     /* Should look like
     [Hint]: [receiving_player]'s [hintItem] is at [hintLocation] in [finding_player]'s World. (FOUND/NOT FOUND)
     END*/
     //vars just for text
+    /*REMOVING FOUND/NOT FOUND BECAUSE OF BUGS
     var findTog = [];
     for (k in hintFound) {
         if (hintFound[k] == true) {
@@ -283,14 +303,15 @@ function updateText() {
         } else {
             findTog.push("NOT FOUND");
         }
-    }
+    }*/
 
     //Parse Info into readable text
     for (p in findingPlayer) {
-        hintTxt += `<div class='textMsg'>[Hint]: ` + receivingPlayer[p] + `'s ` + hintItem[p] + ` is at ` + hintLocation[p] + ` in ` + findingPlayer[p] + `'s World. (` + findTog[p] + `)</div>`
+        hintTxt += `<div class='hintMsg'>` + receivingPlayer[p] + `'s ` + hintItem[p] + ` is at ` + hintLocation[p] + ` in ` + findingPlayer[p] + `'s World.</div>`
     }
 
     document.getElementById('hints').innerHTML = hintTxt;
+    document.querySelectorAll('.hintMsg').forEach(el => el.addEventListener('click', changeHintColor));
 }
 
 //Show/Hide Hints

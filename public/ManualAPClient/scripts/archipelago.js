@@ -50,15 +50,15 @@ function getHints() {
             receivingPlayer.push(client.players.name(client.hints.mine[i]['receiving_player']));
             hintLocation.push(client.locations.name(client.players.game(client.hints.mine[i]['finding_player']), client.hints.mine[i]['location']));
             hintItem.push(client.items.name(client.players.game(client.hints.mine[i]['receiving_player']), client.hints.mine[i]["item"]));
-        }
-        for (j in client.hints.mine) {
-            switch (client.hints.mine[j]['found']) {
-                case (true):
-                    hintFound.push(true);
-                case (false):
-                    hintFound.push(false);
+
+            if (hintItemsFound.includes(client.hints.mine[i]["item"])) {
+                hintFound.push(true);
+            } else {
+                hintFound.push(false);
             }
+
         }
+
         updateText();
     }, 250);
 }
@@ -92,9 +92,15 @@ setTimeout(() => {
     catCounter();
 }, 500)
 
+var hintItemsFound = []; //Variable just for hints
+
 //Mark Received Items
 client.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (packet) => {
     var packetItems = packet.items;
+
+    for (i in packet.items) {
+        hintItemsFound.push(packet.items[i]["item"]);
+    }
 
     //Parse items and locations
     for (var i = 0; i < packetItems.length; i++) {
@@ -121,6 +127,7 @@ client.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (packet) => {
     //Give player category count (doesn't do total items yet)
     itemCounter();
     catCounter();
+    getHints();
 })
 
 //Listen for chat activity from player
@@ -133,7 +140,11 @@ document.getElementById('chatBox').addEventListener("keypress", function (event)
 
 //Chat Log
 client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
-    console.log(packet);
+    //console.log(packet);
+
+    //Update Hints
+    getHints();
+
     var testMessage = message;
 
     //Determine newMessage depending on chat message or server message
@@ -158,17 +169,17 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
             } else if (packet['data'][i]['type'] == 'item_id') {
                 //Progression Items
                 if (packet['data'][i]['flags'] == '1') {
-                    tempTxt += "<span style='color:orange'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>"
+                    tempTxt += "<span style='color:gold'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>"
                 }
 
                 //Useful Items
                 if (packet['data'][i]['flags'] == '2') {
-                    tempTxt += "<span style='color:yellow'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>"
+                    tempTxt += "<span style='color:lawngreen'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>"
                 }
 
                 //Filler Items
                 if (packet['data'][i]['flags'] == '0') {
-                    tempTxt += "<span style='color:lightblue'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>"
+                    tempTxt += "<span style='color:cornflowerblue'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>"
                 }
             } else if (packet['data'][i]['type'] == 'location_id') {
                 tempTxt += client.locations.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text']))
@@ -183,36 +194,40 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
 
         for (i in packet['data']) {
             if (packet['data'][i]['type'] == 'player_id') {
-                tempTxt += "<span style='color: rgb(0, 173, 145);'>" + client.players.name(parseInt(packet['data'][i]['text'])) + "</span>";
+                if (client.players.name(parseInt(packet['data'][i]['text'])) == sessionStorage.getItem('player')) {
+                    tempTxt += "<span style='color: rgb(0, 173, 145);'>" + client.players.name(parseInt(packet['data'][i]['text'])) + "</span>";
+                } else {
+                    tempTxt += "<span style='color: lightblue;'>" + client.players.name(parseInt(packet['data'][i]['text'])) + "</span>";
+                }
             } else if (packet['data'][i]['type'] == 'item_id') {
                 //Progression Items
                 if (packet['data'][i]['flags'] == '1') {
-                    tempTxt += "<span style='color:orange'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
+                    tempTxt += "<span style='color:gold'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
                     colorTemp = '1';
                 }
 
                 //Useful Items
                 if (packet['data'][i]['flags'] == '2') {
-                    tempTxt += "<span style='color:yellow'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
+                    tempTxt += "<span style='color:lawngreen'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
                     colorTemp = '2';
                 }
 
                 //Filler Items
                 if (packet['data'][i]['flags'] == '0') {
-                    tempTxt += "<span style='color:lightblue'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
+                    tempTxt += "<span style='color:cornflowerblue'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
                     colorTemp = '0';
                 }
             } else if (packet['data'][i]['type'] == 'location_id') {
                 if (colorTemp == '1') {
-                    tempTxt += "<span style='color:orange'>" + client.locations.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
+                    tempTxt += "<span style='color:gold'>" + client.locations.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
                 }
 
                 if (colorTemp == '2') {
-                    tempTxt += "<span style='color:yellow'>" + client.locations.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
+                    tempTxt += "<span style='color:lawngreen'>" + client.locations.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
                 }
 
                 if (colorTemp == '0') {
-                    tempTxt += "<span style='color:lightblue'>" + client.locations.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
+                    tempTxt += "<span style='color:cornflowerblue'>" + client.locations.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
                 }
             } else {
                 tempTxt += packet['data'][i]['text'];
@@ -225,9 +240,6 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
     var newMessage = testMessage;
     var oldmsg = document.getElementById('log').innerHTML;
     document.getElementById('log').innerHTML = "<div class='textMsg'>" + newMessage + "</div>" + oldmsg + "";
-
-    //Update Hints
-    getHints();
 });
 
 // Connect to the Archipelago server

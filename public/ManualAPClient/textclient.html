@@ -16,29 +16,6 @@
     <table
         style="height: calc(97vh - 150px); background-color: rgba(68, 68, 68, 0.76); padding: 20px; border-radius: 25px; border: 2px solid white;">
         <tr>
-            <td style="text-align:center; vertical-align: top; height: 10px; width: 38vw;">
-                <div>Items</div>
-            </td>
-            <td style="text-align:center; vertical-align: top; height: 10px; width: 38vw;">
-                <div>Locations</div>
-            </td>
-            <td style="text-align:center; vertical-align: top; height: 10px; width: 20vw;">
-                <!--onclick="showHide('hints')"-->
-                <div>Hints</div>
-            </td>
-        </tr>
-        <tr>
-            <td style="vertical-align: top; width: 38vw;">
-                <div class="checks" id="items"></div>
-            </td>
-            <td style="vertical-align: top; width: 38vw;">
-                <div class='checks' id="locations"></div>
-            </td>
-            <td style="vertical-align: top; width: 20vw;">
-                <div id='hints'></div>
-            </td>
-        </tr>
-        <tr>
             <td colspan="3" style="vertical-align: top; width: 100%;">
                 <div id="log"></div>
             </td>
@@ -47,21 +24,10 @@
             <td colspan="3" align="right" style="height: 100px">
                 <table width="100%">
                     <tr>
-                        <td style="vertical-align: bottom; width: 25%" align="center">
-                            <label for="searchbox">Filter By Location</label><br>
-                            <input type="search" oninput="liveSearch()" id="searchbox">
-                        </td>
                         <td style="vertical-align: bottom; width: 50%" align="center">Chat<br><input type="text"
                                 id="chatBox" style="width: 100%;"></td>
                         <td style='vertical-align: bottom; text-align: right; width: 25%;'>
                             <div><button class="connButton" onclick="disconnect()">Disconnect</button></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" align="center">
-                            <span style='color:gold'>Progression Item</span> |
-                            <span style='color:lawngreen'>Useful Item</span> |
-                            <span style='color:cornflowerblue'>Filler Item</span>
                         </td>
                     </tr>
                 </table>
@@ -83,8 +49,8 @@
     </div>
 
     <script src="scripts/build.js"></script>
-    <script src="scripts/apclient.js"></script>
-    <script type="module" src="scripts/archipelago.js"></script>
+    <script src="scripts/textOnly/apclient.js"></script>
+    <script type="module" src="scripts/textOnly/archipelago.js"></script>
 </body>
 
 </html>

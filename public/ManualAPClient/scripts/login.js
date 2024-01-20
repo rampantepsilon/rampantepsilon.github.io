@@ -11,20 +11,26 @@ if (sessionStorage.getItem('player')) {
     document.getElementById('player').value = sessionStorage.getItem('player');
 }
 
-function connect() {
+function connect(type) {
     var host = document.getElementById('hostname').value;
     var port = document.getElementById('port').value;
     var game = document.getElementById('game').value;
     var player = document.getElementById('player').value;
 
-    if (game.includes('Manual_')) {
-        if (document.getElementById('style').files.length == 0) {
-            document.getElementById('err').innerHTML = "No APMANUAL supplied. Please supply the .APMANUAL file pertaining to the game to continue."
+    if (type == 'manual') {
+        if (game.includes('Manual_')) {
+            if (document.getElementById('style').files.length == 0) {
+                document.getElementById('err').innerHTML = "No APMANUAL supplied. Please supply the .APMANUAL file pertaining to the game to continue."
+            } else {
+                complete(host, port, game, player);
+            }
         } else {
-            complete(host, port, game, player);
+            document.getElementById('err').innerHTML = "Invalid Game! Game must be a Manual AP world formatted as 'Manual_{Game}_{Creator}' or 'Manual_{Game}' (Second instance is rare).<br>Please correct and try again."
         }
-    } else {
-        document.getElementById('err').innerHTML = "Invalid Game! Game must be a Manual AP world formatted as 'Manual_{Game}_{Creator}' or 'Manual_{Game}' (Second instance is rare).<br>Please correct and try again."
+    }
+
+    if (type == 'text') {
+        completeText(host, port, player);
     }
 }
 
@@ -35,6 +41,14 @@ function complete(host, port, game, player) {
     sessionStorage.setItem('player', player);
 
     window.location.href = './apclient.html'
+}
+
+function completeText(host, port, player) {
+    sessionStorage.setItem('host', host);
+    sessionStorage.setItem('port', port);
+    sessionStorage.setItem('player', player);
+
+    window.location.href = './textclient.html'
 }
 
 //Allow grouping from APWorld
@@ -178,3 +192,16 @@ function parseInfo(locations, items) {
     sessionStorage.setItem('itemIDs', JSON.stringify(uniqueItemID));
     sessionStorage.setItem('itemType', JSON.stringify(itemType));
 }
+
+//Radio Change
+$('input[type=radio][name=style]').change(function () {
+    if (this.value == 'manual') {
+        $("#player").attr('disabled', 'disabled');
+        $('#manualBtn').show();
+        $('#textBtn').hide();
+    } else if (this.value == 'text') {
+        $("#player").removeAttr('disabled');
+        $('#manualBtn').hide();
+        $('#textBtn').show();
+    }
+})
