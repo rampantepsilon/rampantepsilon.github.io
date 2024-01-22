@@ -1,11 +1,12 @@
-var versionTag = "Archipelago Web Client v0.4.4 Build 20240122 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
+var versionTag = "Archipelago Web Client v0.4.4 Build 20240122a Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
 
 document.getElementById('buildText').innerHTML = versionTag;
 
 document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archipelago is not part of the main Archipelago. Any issues with the web client or manuals in general should be asked in the <a href='https://discord.gg/T5bcsVHByx' style='color:white'>Manual Archipelago Discord Server</a></h4>
 <h3>Changes to ` + versionTag + `</h3>
 <ul>
-<li>HOTFIX: Fixed issue where the client wouldn't load .apmanual files.</li>
+<li>HOTFIX 20240122a: Fixed issue where you couldn't close the items group when doing checks.</li>
+<li>HOTFIX 20240122: Fixed issue where the client wouldn't load .apmanual files.</li>
 <li>Added Text Only client to the site.</li>
 <li>Changed colors for items.</li>
 <li>Changed coloring method. Should be more stable now.</li>

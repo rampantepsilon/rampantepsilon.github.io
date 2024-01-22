@@ -286,7 +286,8 @@ div#locations {
     cursor: pointer;
 }
 
-.is-hidden {
+.is-hidden,
+.dont-show {
     display: none;
 }
 

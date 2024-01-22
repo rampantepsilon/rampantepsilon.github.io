@@ -73,7 +73,7 @@ for (i in uniqueItemCat) {
                     styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("&", "");
                 }
 
-                items.innerHTML += "<span class='itemCard " + itemIDs[j] + "2 " + styleCombine + "' style='display:none'><div class='items itemsStyle' id='" + uniqueItemCat[i] + "' data-id='" + itemIDs[j] + "'>" + itemNames[j] + " (<span class='" + itemIDs[j] + "'>0</span>)</div></span>"
+                items.innerHTML += "<span class='itemCard " + itemIDs[j] + "2 " + styleCombine + " is-hidden'><div class='items itemsStyle' id='" + uniqueItemCat[i] + "' data-id='" + itemIDs[j] + "'>" + itemNames[j] + " (<span class='" + itemIDs[j] + "'>0</span>)</div></span>"
             } else if (itemCat[j] == null) {
                 styleSplit = uniqueItemCat[i].split(' ');
                 var styleCombine = '';
@@ -82,11 +82,10 @@ for (i in uniqueItemCat) {
                     styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("&", "");
                 }
 
-                items.innerHTML += "<span class='itemCard " + itemIDs[j] + "2 " + styleCombine + "' style='display:none'><div class='items itemsStyle' id='" + uniqueItemCat[i] + "' data-id='" + itemIDs[j] + "'>" + itemNames[j] + " (<span class='" + itemIDs[j] + "'>0</span>)</div></span>"
+                items.innerHTML += "<span class='itemCard " + itemIDs[j] + "2 " + styleCombine + " is-hidden'><div class='items itemsStyle' id='" + uniqueItemCat[i] + "' data-id='" + itemIDs[j] + "'>" + itemNames[j] + " (<span class='" + itemIDs[j] + "'>0</span>)</div></span>"
             }
         }
     }
-    itemCatClose(i);
 }
 
 //Close & Open Item Cateorgies by clicking
@@ -100,10 +99,10 @@ function itemCatClose(category) {
         var items = cards[i].className;
         let regex = new RegExp(`\\s${search_query}`);
         if (regex.test(items) == true) {
-            if (cards[i].classList.contains('is-hidden')) {
-                cards[i].classList.remove("is-hidden");
+            if (cards[i].classList.contains('dont-show')) {
+                cards[i].classList.remove("dont-show");
             } else {
-                cards[i].classList.add("is-hidden");
+                cards[i].classList.add("dont-show");
             }
         }
     }
@@ -184,27 +183,6 @@ function liveSearch() {
     if (search_query == '') {
         for (var i = 0; i < uniqueCat.length; i++) {
             locCatClose(uniqueCat[i]);
-        }
-    }
-}
-
-//Filter Items Scripting (by category)
-function itemSearch() {
-    // Locate the card elements
-    let cards = document.querySelectorAll('.items')
-    // Locate the search input
-    let search_query = document.getElementById("searchbox2").value;
-    // Loop through the cards
-    for (var i = 0; i < cards.length; i++) {
-        // If the text is within the card...
-        if (cards[i].id.toLowerCase()
-            // ...and the text matches the search query...
-            .includes(search_query.toLowerCase())) {
-            // ...remove the `.is-hidden` class.
-            cards[i].classList.remove("is-hidden");
-        } else {
-            // Otherwise, add the class.
-            cards[i].classList.add("is-hidden");
         }
     }
 }

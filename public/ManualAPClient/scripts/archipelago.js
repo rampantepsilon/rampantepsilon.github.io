@@ -80,7 +80,7 @@ document.querySelectorAll('.locations').forEach(el => el.addEventListener('click
 document.querySelectorAll('.itemsStyle').forEach(el => el.addEventListener('change', event => {
     var currentID = parseInt(event.target.getAttribute('data-id'));
     if (currentID != 0) {
-        document.getElementById(currentID + "2").style.display = 'block'
+        document.getElementById(currentID + "2").setAttribute('style', 'is-hidden')
     }
 }))
 
@@ -112,7 +112,7 @@ client.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (packet) => {
             document.getElementsByClassName(receivedItem)[j].innerHTML = currentCount + 1;
             if (receivedItem != 0) {
                 if (document.getElementsByClassName(receivedItem + "2")[j]) {
-                    document.getElementsByClassName(receivedItem + "2")[j].style.display = 'block'
+                    document.getElementsByClassName(receivedItem + "2")[j].classList.remove('is-hidden');
                 }
             }
         }
