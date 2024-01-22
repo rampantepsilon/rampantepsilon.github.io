@@ -194,7 +194,7 @@ function parseInfo(locations, items) {
 }
 
 //Radio Change
-$('input[type=radio][name=style]').change(function () {
+$('input[type=radio][name=clientType]').change(function () {
     if (this.value == 'manual') {
         $("#player").attr('disabled', 'disabled');
         $('#manualBtn').show();

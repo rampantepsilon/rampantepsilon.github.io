@@ -1,18 +1,16 @@
-var versionTag = "Archipelago Web Client v0.4.4 Build 20240119 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
+var versionTag = "Archipelago Web Client v0.4.4 Build 20240122 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
 
 document.getElementById('buildText').innerHTML = versionTag;
 
 document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archipelago is not part of the main Archipelago. Any issues with the web client or manuals in general should be asked in the <a href='https://discord.gg/T5bcsVHByx' style='color:white'>Manual Archipelago Discord Server</a></h4>
 <h3>Changes to ` + versionTag + `</h3>
 <ul>
-<li>Patch 20240119: Added starting works on Hint Display</li>
-<li>Patch 20240119: Change coloring method. Should be more stable now.</li>
-<li>HOTFIX (20240118): Fixed issue where game specific filler and __Manual Game Complete__ weren't showing properly.</li>
-<li>Rework of backend to accomodate to the .APMANUAL files now provided with all Manual APs.</li>
+<li>HOTFIX: Fixed issue where the client wouldn't load .apmanual files.</li>
+<li>Added Text Only client to the site.</li>
+<li>Changed colors for items.</li>
+<li>Changed coloring method. Should be more stable now.</li>
 <li>Removed Deathlink tag when logging in. (Will probably bring this back once I look into Deathlink more.)</li>
-<li>Change the build to show 0.4.4 when connecting.</li>
 <li>Added Tag "ManualWeb" to show that it's the web client connecting.</li>
-<li>Added Color Coding for items and player names. (ALPHA VERSION) [Issues may exist.]</li>
 </ul>
 <h4>Known Issues</h4>
 <ul>
