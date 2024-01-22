@@ -70,7 +70,7 @@ for (i in uniqueItemCat) {
                 var styleCombine = '';
 
                 for (var l = 0; l < styleSplit.length; l++) {
-                    styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "");
+                    styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("&", "");
                 }
 
                 items.innerHTML += "<span class='itemCard " + itemIDs[j] + "2 " + styleCombine + "' style='display:none'><div class='items itemsStyle' id='" + uniqueItemCat[i] + "' data-id='" + itemIDs[j] + "'>" + itemNames[j] + " (<span class='" + itemIDs[j] + "'>0</span>)</div></span>"
@@ -79,7 +79,7 @@ for (i in uniqueItemCat) {
                 var styleCombine = '';
 
                 for (var l = 0; l < styleSplit.length; l++) {
-                    styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "");
+                    styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("&", "");
                 }
 
                 items.innerHTML += "<span class='itemCard " + itemIDs[j] + "2 " + styleCombine + "' style='display:none'><div class='items itemsStyle' id='" + uniqueItemCat[i] + "' data-id='" + itemIDs[j] + "'>" + itemNames[j] + " (<span class='" + itemIDs[j] + "'>0</span>)</div></span>"
@@ -94,7 +94,7 @@ function itemCatClose(category) {
     // Locate the card elements
     let cards = document.querySelectorAll('.itemCard')
     // Locate the search input
-    let search_query = uniqueItemCat[category].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "");
+    let search_query = uniqueItemCat[category].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("&", "");
     // Loop through the cards
     for (var i = 0; i < cards.length; i++) {
         var items = cards[i].className;
@@ -130,10 +130,10 @@ for (i in uniqueLocCat) {
                 var combineStyle = '';
 
                 for (var l = 0; l < splitStyle.length; l++) {
-                    combineStyle += splitStyle[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll('(', '').replaceAll(')', '');
+                    combineStyle += splitStyle[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll('(', '').replaceAll(')', '').replaceAll("&", "");
                 }
 
-                var visTrigger = locCat[j][k].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("(", "").replaceAll(")", "");
+                var visTrigger = locCat[j][k].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("(", "").replaceAll(")", "").replaceAll("&", "");
 
                 locDisplay.innerHTML += `<div class='locations ` + combineStyle + `' id="` + locIDs[j] + `" data-el="` + locIDs[j] + `" data-vis="` + visTrigger + `">` + locNames[j] + "</div>";
             }
@@ -147,7 +147,7 @@ function locCatClose(category) {
     // Locate the card elements
     let cards = document.querySelectorAll('.locations')
     // Locate the search input
-    let search_query = uniqueLocCat[category].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("(", "").replaceAll(")", "");
+    let search_query = uniqueLocCat[category].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("(", "").replaceAll(")", "").replaceAll("&", "");
     // Loop through the cards
     for (var i = 0; i < cards.length; i++) {
         var items = cards[i].getAttribute('data-vis');
@@ -217,7 +217,7 @@ function catCounter() {
             var styleCombine = '';
 
             for (var l = 0; l < styleSplit.length; l++) {
-                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll('(', '').replaceAll(')', '');
+                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll('(', '').replaceAll(')', '').replaceAll("&", "");
             }
 
             var parseName = '.' + styleCombine;
@@ -238,7 +238,7 @@ function itemCounter() {
             var styleCombine = '';
 
             for (var l = 0; l < styleSplit.length; l++) {
-                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "");
+                styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll("&", "");
             }
 
             var parseName = '.' + styleCombine + ":visible";
