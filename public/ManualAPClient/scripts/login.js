@@ -81,7 +81,8 @@ $("#style").on("change", function (evt) {
                 //Get information JSONs
                 var locations = decoded['locations'];
                 var items = decoded['items'];
-                parseInfo(locations, items);
+                var categories = decoded['categories'];
+                parseInfo(locations, items, categories);
             },
             false,
         );
@@ -92,7 +93,8 @@ $("#style").on("change", function (evt) {
     }
 })
 
-function parseInfo(locations, items) {
+function parseInfo(locations, items, categories) {
+    console.log(categories);
     //Make Object easier to parse
     var locMain = [];
     var itemMain = [];
@@ -108,11 +110,15 @@ function parseInfo(locations, items) {
     for (i in locMain) {
         var locCatTemp = [];
         for (j in locMain[i]["category"]) {
-            locCatTemp.push(locMain[i]["category"][j]);
+            if (!categories[locMain[i]['category'][j]]) {
+                locCatTemp.push(locMain[i]["category"][j]);
+            }
         }
         for (k in locCatTemp) {
             if (!uniqueLocCat.includes(locCatTemp[k])) {
-                uniqueLocCat.push(locCatTemp[k]);
+                if (!categories[locCatTemp[k]]) {
+                    uniqueLocCat.push(locCatTemp[k]);
+                }
             }
         }
     }
