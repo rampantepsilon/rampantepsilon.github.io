@@ -81,7 +81,10 @@ $("#style").on("change", function (evt) {
                 //Get information JSONs
                 var locations = decoded['locations'];
                 var items = decoded['items'];
-                var categories = decoded['categories'];
+                var categories = '';
+                if (decoded['categories']) {
+                    categories = decoded['categories'];
+                }
                 parseInfo(locations, items, categories);
             },
             false,
@@ -94,7 +97,6 @@ $("#style").on("change", function (evt) {
 })
 
 function parseInfo(locations, items, categories) {
-    console.log(categories);
     //Make Object easier to parse
     var locMain = [];
     var itemMain = [];
@@ -110,13 +112,21 @@ function parseInfo(locations, items, categories) {
     for (i in locMain) {
         var locCatTemp = [];
         for (j in locMain[i]["category"]) {
-            if (!categories[locMain[i]['category'][j]]) {
+            if (!categories == '') {
+                if (!categories[locMain[i]['category'][j]]) {
+                    locCatTemp.push(locMain[i]["category"][j]);
+                }
+            } else {
                 locCatTemp.push(locMain[i]["category"][j]);
             }
         }
         for (k in locCatTemp) {
             if (!uniqueLocCat.includes(locCatTemp[k])) {
-                if (!categories[locCatTemp[k]]) {
+                if (!categories == '') {
+                    if (!categories[locCatTemp[k]]) {
+                        uniqueLocCat.push(locCatTemp[k]);
+                    }
+                } else {
                     uniqueLocCat.push(locCatTemp[k]);
                 }
             }

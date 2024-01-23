@@ -265,6 +265,7 @@ var receivingPlayer = [];
 var hintLocation = [];
 var hintItem = [];
 var hintFound = [];
+var hintFlags = [];
 
 function updateText() {
     document.getElementById('hints').innerHTML = '';
@@ -285,7 +286,17 @@ function updateText() {
 
     //Parse Info into readable text
     for (p in findingPlayer) {
-        hintTxt += `<div class='hintMsg'>` + receivingPlayer[p] + `'s ` + hintItem[p] + ` is at ` + hintLocation[p] + ` in ` + findingPlayer[p] + `'s World.</div>`
+        if (hintFlags[p] == 0) { //Filler
+            hintTxt += `<div class='hintMsg'><span style='color: rgb(0, 173, 145);'>` + receivingPlayer[p] + `'s</span> <span style='color:cornflowerblue'>` + hintItem[p] + `</span> is at ` + hintLocation[p] + ` in <span style='color: rgb(0, 173, 145);'>` + findingPlayer[p] + `'s</span> World.</div>`
+        } else if (hintFlags[p] == 1) { //Progression
+            hintTxt += `<div class='hintMsg'><span style='color: rgb(0, 173, 145);'>` + receivingPlayer[p] + `'s</span> <span style='color:gold'>` + hintItem[p] + `</span> is at ` + hintLocation[p] + ` in <span style='color: rgb(0, 173, 145);'>` + findingPlayer[p] + `'s</span> World.</div>`
+        } else if (hintFlags[p] == 2) { //Useful
+            hintTxt += `<div class='hintMsg'><span style='color: rgb(0, 173, 145);'>` + receivingPlayer[p] + `'s</span> <span style='color:lawngreen'>` + hintItem[p] + `</span> is at ` + hintLocation[p] + ` in <span style='color: rgb(0, 173, 145);'>` + findingPlayer[p] + `'s</span> World.</div>`
+        } else if (hintFlags[p] == 4) { //Trap
+            hintTxt += `<div class='hintMsg'><span style='color: rgb(0, 173, 145);'>` + receivingPlayer[p] + `'s</span> ` + hintItem[p] + ` is at ` + hintLocation[p] + ` in <span style='color: rgb(0, 173, 145);'>` + findingPlayer[p] + `'s</span> World.</div>`
+        } else { //Not passed
+            hintTxt += `<div class='hintMsg'><span style='color: rgb(0, 173, 145);'>` + receivingPlayer[p] + `'s</span> <span style='color:lightcoral'>` + hintItem[p] + `</span> is at ` + hintLocation[p] + ` in <span style='color: rgb(0, 173, 145);'>` + findingPlayer[p] + `'s</span> World.</div>`
+        }
     }
 
     document.getElementById('hints').innerHTML = hintTxt;
