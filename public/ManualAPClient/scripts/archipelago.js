@@ -41,7 +41,7 @@ client.addListener(SERVER_PACKET_TYPE.CONNECTED, (packet) => {
 function hideLocations() {
     var visLocations = client.locations.missing;
     var tempLocs = JSON.parse(sessionStorage.getItem('locIDs'));
-    console.log(tempLocs);
+
     setTimeout(() => {
         for (i in tempLocs) {
             if (!visLocations.includes(tempLocs[i])) {
@@ -160,7 +160,7 @@ document.getElementById('chatBox').addEventListener("keypress", function (event)
 
 //Chat Log
 client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
-    console.log(packet);
+    //console.log(packet);
 
     //Update Hints
     getHints();
