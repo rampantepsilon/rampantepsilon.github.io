@@ -73,9 +73,9 @@ $("#style").on("change", function (evt) {
                 var DLRadio = document.getElementsByName('deathlink');
                 var checked = Array.from(DLRadio).find((radio) => radio.checked);
                 if (checked.value == 'yes') {
-                    sessionStorage.setItem('tags', "['AP', 'ManualWeb', 'DeathLink', '(WIP)']")
+                    sessionStorage.setItem('tags', JSON.stringify(['AP', 'ManualWeb', 'DeathLink', '(WIP)']))
                 } else {
-                    sessionStorage.setItem('tags', "['AP', 'ManualWeb', '(WIP)']");
+                    sessionStorage.setItem('tags', JSON.stringify(['AP', 'ManualWeb', '(WIP)']));
                 }
 
                 //Get information JSONs
@@ -216,9 +216,14 @@ $('input[type=radio][name=clientType]').change(function () {
         $("#player").attr('disabled', 'disabled');
         $('#manualBtn').show();
         $('#textBtn').hide();
+        $('#deathlink').removeAttr('disabled')
     } else if (this.value == 'text') {
         $("#player").removeAttr('disabled');
         $('#manualBtn').hide();
         $('#textBtn').show();
+        var DLRadio = document.getElementsByName('deathlink');
+        var checked = Array.from(DLRadio).find((radio) => radio.checked);
+        checked.value = 'no'
+        $('#deathlink').attr('disabled', 'disabled')
     }
 })
