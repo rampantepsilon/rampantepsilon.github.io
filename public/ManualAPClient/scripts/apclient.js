@@ -10,6 +10,7 @@ function disconnect() {
     sessionStorage.removeItem('uniqueItemCat');
     sessionStorage.removeItem('itemType');
     sessionStorage.removeItem('background');
+    sessionStorage.removeItem('tags');
 
     window.location.href = './index.html'
 }

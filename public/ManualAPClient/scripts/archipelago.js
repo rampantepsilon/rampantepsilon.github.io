@@ -20,7 +20,7 @@ const connectionInfo = {
         major: 0,
         minor: 4,
     },
-    tags: ['AP', 'ManualWeb', 'DeathLink', '(WIP)']//tags: ['AP', 'DeathLink', '(WIP)']
+    tags: sessionStorage.getItem('tags')//tags: ['AP', 'DeathLink', '(WIP)']
 };
 
 // Set up event listeners

@@ -69,14 +69,14 @@ $("#style").on("change", function (evt) {
                 document.getElementById('game').value = decoded['game'];
                 document.getElementById('player').value = decoded['player_name'];
 
-                //Set Background
-                /*var bckgrndRadio = document.getElementsByName('bckgrnd');
-                var checked = Array.from(bckgrndRadio).find((radio) => radio.checked);
+                //Set DeathLink
+                var DLRadio = document.getElementsByName('deathlink');
+                var checked = Array.from(DLRadio).find((radio) => radio.checked);
                 if (checked.value == 'yes') {
-                    if (decoded['background-image']) {
-                        sessionStorage.setItem('background', decoded['background-image'])
-                    }
-                }*/
+                    sessionStorage.setItem('tags', "['AP', 'ManualWeb', 'DeathLink', '(WIP)']")
+                } else {
+                    sessionStorage.setItem('tags', "['AP', 'ManualWeb', '(WIP)']");
+                }
 
                 //Get information JSONs
                 var locations = decoded['locations'];
