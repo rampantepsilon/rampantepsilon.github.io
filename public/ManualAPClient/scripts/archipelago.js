@@ -20,7 +20,7 @@ const connectionInfo = {
         major: 0,
         minor: 4,
     },
-    tags: ['AP', 'ManualWeb', '(WIP)']//tags: ['AP', 'DeathLink', '(WIP)']
+    tags: ['AP', 'ManualWeb', 'DeathLink', '(WIP)']//tags: ['AP', 'DeathLink', '(WIP)']
 };
 
 // Set up event listeners
@@ -34,8 +34,23 @@ client.addListener(SERVER_PACKET_TYPE.CONNECTED, (packet) => {
 
     setTimeout(() => {
         console.log(client.items.received);
+        hideLocations();
     }, 500);
 });
+
+function hideLocations() {
+    var visLocations = client.locations.missing;
+    var tempLocs = JSON.parse(sessionStorage.getItem('locIDs'));
+    console.log(tempLocs);
+    setTimeout(() => {
+        for (i in tempLocs) {
+            if (!visLocations.includes(tempLocs[i])) {
+                document.getElementById(tempLocs[i]).style.display = 'none';
+            }
+        }
+        catCounter();
+    }, 500);
+}
 
 function getHints() {
     setTimeout(() => {
@@ -89,6 +104,16 @@ setTimeout(() => {
 
 var hintItemsFound = []; //Variable just for hints
 
+//Listener for DeathLink packets
+client.addListener(SERVER_PACKET_TYPE.BOUNCED, (packet) => {
+    console.log(packet);
+
+    var deathTxt = "DEATH SENT BY " + packet['data']['source'];
+
+    var oldmsg = document.getElementById('log').innerHTML;
+    document.getElementById('log').innerHTML = "<div class='textMsg'>" + deathTxt + "</div>" + oldmsg + "";
+})
+
 //Mark Received Items
 client.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (packet) => {
     var packetItems = packet.items;
@@ -135,7 +160,7 @@ document.getElementById('chatBox').addEventListener("keypress", function (event)
 
 //Chat Log
 client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
-    //console.log(packet);
+    console.log(packet);
 
     //Update Hints
     getHints();

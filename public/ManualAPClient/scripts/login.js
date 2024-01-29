@@ -82,9 +82,10 @@ $("#style").on("change", function (evt) {
                 var locations = decoded['locations'];
                 var items = decoded['items'];
                 var categories = '';
-                if (decoded['categories']) {
+                //Commenting out due to bug
+                /*if (decoded['categories']) {
                     categories = decoded['categories'];
-                }
+                }*/
                 parseInfo(locations, items, categories);
             },
             false,
