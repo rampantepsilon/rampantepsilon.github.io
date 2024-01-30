@@ -41,11 +41,17 @@ client.addListener(SERVER_PACKET_TYPE.CONNECTED, (packet) => {
 function hideLocations() {
     var visLocations = client.locations.missing;
     var tempLocs = JSON.parse(sessionStorage.getItem('locIDs'));
+    visLocations.push(tempLocs[tempLocs.length - 1]);
 
     setTimeout(() => {
         for (i in tempLocs) {
             if (!visLocations.includes(tempLocs[i])) {
-                document.getElementById(tempLocs[i]).style.display = 'none';
+                for (j in document.getElementsByClassName("locations")) {
+                    if (document.getElementsByClassName('locations')[j].id == tempLocs[i]) {
+                        document.getElementsByClassName('locations')[j].style.display = 'none';
+                    }
+                }
+                //document.getElementById(tempLocs[i]).style.display = 'none';
             }
         }
         catCounter();
@@ -80,10 +86,19 @@ document.querySelectorAll('.locations').forEach(el => el.addEventListener('click
     } else {
         for (var i = 0; i < locIDs.length - 1; i++) {
             client.locations.check(parseInt(locIDs[i]));
-            document.getElementById(locIDs[i]).style.display = 'none';
+            for (var j = 0; j < document.getElementsByClassName("locations").length; j++) {
+                if (document.getElementsByClassName('locations')[j].id == locIDs[i]) {
+                    document.getElementsByClassName('locations')[j].style.display = 'none';
+                }
+            }
         }
     }
-    document.getElementById(event.target.getAttribute('data-el')).style.display = 'none';
+    for (var j = 0; j < document.getElementsByClassName("locations").length; j++) {
+        if (document.getElementsByClassName('locations')[j].id == event.target.getAttribute('data-el')) {
+            document.getElementsByClassName('locations')[j].style.display = 'none';
+        }
+    }
+    catCounter();
 }));
 
 //Add listener to show items as found
@@ -248,6 +263,8 @@ client.addListener(SERVER_PACKET_TYPE.PRINT_JSON, (packet, message) => {
                     tempTxt += "<span style='color:lightcoral'>" + client.items.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text'])) + "</span>";
                     colorTemp = '4';
                 }
+            } else if (packet['data'][i]['type'] == 'location_id') {
+                tempTxt += client.locations.name(client.players.game(packet['data'][i]['player']), parseInt(packet['data'][i]['text']))
             } else {
                 tempTxt += packet['data'][i]['text'];
             }
