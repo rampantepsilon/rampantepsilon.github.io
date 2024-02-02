@@ -47,18 +47,23 @@
             <td colspan="3" align="right" style="height: 100px">
                 <table width="100%">
                     <tr>
-                        <td style="vertical-align: bottom; width: 25%" align="center">
+                        <td style="vertical-align: bottom; width: 20%" align="center">
                             <label for="searchbox">Filter By Location</label><br>
                             <input type="search" oninput="liveSearch()" id="searchbox">
                         </td>
-                        <td style="vertical-align: bottom; width: 50%" align="center">Chat<br><input type="text"
+                        <td style="vertical-align: bottom; width: 40%" align="center">Chat<br><input type="text"
                                 id="chatBox" style="width: 100%;"></td>
-                        <td style='vertical-align: bottom; text-align: right; width: 25%;'>
-                            <div><button class="connButton" onclick="disconnect()">Disconnect</button></div>
+                        <td style='vertical-align: bottom; text-align: right; width: 20%;' id="deathlinkContainer">
+                            <button class="connButton" id="deathlink">Death</button>
+                        </td>
+                        <td style='vertical-align: bottom; text-align: right; width: 20%;'>
+                            <div>
+                                <button class="connButton" onclick="disconnect()">Disconnect</button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3" align="center">
+                        <td colspan="4" align="center">
                             <span style='color:gold'>Progression Item</span> |
                             <span style='color:lawngreen'>Useful Item</span> |
                             <span style="color: lightcoral;">Trap Item</span> |

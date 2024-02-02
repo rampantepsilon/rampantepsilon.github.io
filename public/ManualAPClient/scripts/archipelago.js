@@ -35,6 +35,9 @@ client.addListener(SERVER_PACKET_TYPE.CONNECTED, (packet) => {
     setTimeout(() => {
         console.log(client.items.received);
         hideLocations();
+        if (!JSON.parse(sessionStorage.getItem('tags')).includes('DeathLink')) {
+            $("#deathlinkContainer").hide();
+        }
     }, 500);
 });
 
@@ -126,7 +129,13 @@ client.addListener(SERVER_PACKET_TYPE.BOUNCED, (packet) => {
     var deathTxt = "DEATH SENT BY " + packet['data']['source'];
 
     var oldmsg = document.getElementById('log').innerHTML;
-    document.getElementById('log').innerHTML = "<div class='textMsg'>" + deathTxt + "</div>" + oldmsg + "";
+    document.getElementById('log').innerHTML = "<div class='textMsg' style='color: red;'>" + deathTxt + "</div>" + oldmsg + "";
+})
+
+//Send DeathLink
+document.getElementById('deathlink').addEventListener("click", () => {
+    client.send({ cmd: "Bounce", data: { cause: "", source: sessionStorage.getItem('player'), time: Date.now() }, tags: ['DeathLink'] });
+    console.log("bounced");
 })
 
 //Mark Received Items
