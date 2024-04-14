@@ -1,18 +1,11 @@
-var versionTag = "Archipelago Web Client v0.4.4 Build 20240201 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
+var versionTag = "Archipelago Web Client v0.4.5 Build 20240414 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
 
 document.getElementById('buildText').innerHTML = versionTag;
 
 document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archipelago is not part of the main Archipelago. Any issues with the web client or manuals in general should be asked in the <a href='https://discord.gg/T5bcsVHByx' style='color:white'>Manual Archipelago Discord Server</a></h4>
 <h3>Changes to ` + versionTag + `</h3>
 <ul>
-<li>Added button to send Death to DeathLink clients.</li>
-<li>Fixed bug where __Manual_Game_Completion__ wouldn't show up for players.</li>
-<li>Fixed bug where Hints wouldn't display properly in the text chat.</li>
-<li>Fixed bug where checks in multiple categories wouldn't clear when marking them or when refreshing.</li>
-<li>Fixed bug where some games with the new category support would fail to show checks. (New method checks what locations are available after connecting and only using the apmanual file as the template.)</li>
-<li>Added basic DeathLink support.</li>
-<li>Added Text Only client to the site.</li>
-<li>Added Tag "ManualWeb" to show that it's the web client connecting.</li>
+<li>Added update for v0.4.5 of Archipelago</li>
 </ul>
 <h4>Known Issues</h4>
 <ul>
