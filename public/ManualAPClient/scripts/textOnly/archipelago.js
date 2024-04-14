@@ -16,7 +16,7 @@ const connectionInfo = {
     name: sessionStorage.getItem('player'), // Replace with the player slot name.
     items_handling: ITEMS_HANDLING_FLAGS.REMOTE_ALL,
     version: {
-        build: 4,
+        build: 5,
         major: 0,
         minor: 4,
     },
