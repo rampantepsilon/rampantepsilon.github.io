@@ -142,6 +142,9 @@ for (i in uniqueLocCat) {
     locCatClose(i);
 }
 
+//Add Victory Button
+locDisplay.innerHTML += `<div class='locations' id="999999999999999" data-el="999999999999999">Victory</div>`;
+
 //Close & Open Location Categories by clicking
 function locCatClose(category) {
     // Locate the card elements

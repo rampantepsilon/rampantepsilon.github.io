@@ -16,9 +16,9 @@ const connectionInfo = {
     name: sessionStorage.getItem('player'), // Replace with the player slot name.
     items_handling: ITEMS_HANDLING_FLAGS.REMOTE_ALL,
     version: {
-        build: 5,
+        build: 0,
         major: 0,
-        minor: 4,
+        minor: 5,
     },
     tags: JSON.parse(sessionStorage.getItem('tags'))//tags: ['AP', 'DeathLink', '(WIP)']
 };
@@ -33,7 +33,7 @@ client.addListener(SERVER_PACKET_TYPE.CONNECTED, (packet) => {
     }
 
     setTimeout(() => {
-        console.log(client.items.received);
+        //console.log(client.items.received);
         hideLocations();
         if (!JSON.parse(sessionStorage.getItem('tags')).includes('DeathLink')) {
             $("#deathlinkContainer").hide();
@@ -74,7 +74,7 @@ function getHints() {
             receivingPlayer.push(client.players.name(client.hints.mine[i]['receiving_player']));
             hintLocation.push(client.locations.name(client.players.game(client.hints.mine[i]['finding_player']), client.hints.mine[i]['location']));
             hintItem.push(client.items.name(client.players.game(client.hints.mine[i]['receiving_player']), client.hints.mine[i]["item"]));
-            console.log(client.hints.mine[i]);
+            //console.log(client.hints.mine[i]);
             hintFlags.push(client.hints.mine[i]['item_flags']);
         }
 
@@ -84,14 +84,17 @@ function getHints() {
 
 //Add listener for marking checks on the server
 document.querySelectorAll('.locations').forEach(el => el.addEventListener('click', event => {
-    if (event.target.getAttribute('data-el') != locIDs[locIDs.length - 1]) {
+    if (event.target.getAttribute('data-el') != locIDs[locIDs.length]) {
         client.locations.check(parseInt(event.target.getAttribute('data-el')));
     } else {
-        for (var i = 0; i < locIDs.length - 1; i++) {
-            client.locations.check(parseInt(locIDs[i]));
-            for (var j = 0; j < document.getElementsByClassName("locations").length; j++) {
-                if (document.getElementsByClassName('locations')[j].id == locIDs[i]) {
-                    document.getElementsByClassName('locations')[j].style.display = 'none';
+        if (parseInt(event.target.getAttribute('data-el')) == 999999999999999) {
+            client.say(sessionStorage.getItem('player') + " has finished their game!")
+            for (var i = 0; i < locIDs.length - 1; i++) {
+                client.locations.check(parseInt(locIDs[i]));
+                for (var j = 0; j < document.getElementsByClassName("locations").length; j++) {
+                    if (document.getElementsByClassName('locations')[j].id == locIDs[i]) {
+                        document.getElementsByClassName('locations')[j].style.display = 'none';
+                    }
                 }
             }
         }
@@ -124,18 +127,33 @@ var hintItemsFound = []; //Variable just for hints
 
 //Listener for DeathLink packets
 client.addListener(SERVER_PACKET_TYPE.BOUNCED, (packet) => {
-    console.log(packet);
+    //console.log(packet);
 
-    var deathTxt = "DEATH SENT BY " + packet['data']['source'];
+    //Get Current Time
+    const time = new Date();
+    var hours = time.getHours();
+    if (hours > 12) {
+        hours = hours - 12;
+    } else if (hours == 0) {
+        hours = 12;
+    }
+    const minutes = time.getMinutes();
+    var seconds = time.getSeconds();
+    if (seconds < 10) {
+        seconds = '0' + seconds;
+    }
+    const currTime = `${hours}:${minutes}:${seconds}`
+
+    var deathTxt = "DEATH sent by " + packet['data']['source'] + " (" + currTime + ")";
 
     var oldmsg = document.getElementById('log').innerHTML;
-    document.getElementById('log').innerHTML = "<div class='textMsg' style='color: red;'>" + deathTxt + "</div>" + oldmsg + "";
+    document.getElementById('log').innerHTML = "<div class='textMsg' style='background-color: red;'>" + deathTxt + "</div>" + oldmsg + "";
 })
 
 //Send DeathLink
 document.getElementById('deathlink').addEventListener("click", () => {
     client.send({ cmd: "Bounce", data: { cause: "", source: sessionStorage.getItem('player'), time: Date.now() }, tags: ['DeathLink'] });
-    console.log("bounced");
+    //console.log("bounced");
 })
 
 //Mark Received Items
