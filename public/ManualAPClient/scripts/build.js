@@ -1,4 +1,4 @@
-var versionTag = "Archipelago Web Client v0.5.0 Build 20240804 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
+var versionTag = "Archipelago Web Client v0.5.0 Build 20241008a Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
 
 document.getElementById('buildText').innerHTML = versionTag;
 
@@ -8,6 +8,7 @@ document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archip
 <li>Added update for v0.5.0 of Archipelago</li>
 <li>Fixed bug where Victory button wouldn't appear for seeds</li>
 <li>Fixed bug where last check couldn't be marked in the client</li>
+<li>HOTFIX: Fixed bug where Victory button quit working after being updated on server.</li>
 </ul>
 <h4>Known Issues</h4>
 <ul>

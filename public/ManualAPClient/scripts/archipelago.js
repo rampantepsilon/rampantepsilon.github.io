@@ -84,19 +84,20 @@ function getHints() {
 
 //Add listener for marking checks on the server
 document.querySelectorAll('.locations').forEach(el => el.addEventListener('click', event => {
-    if (event.target.getAttribute('data-el') != locIDs[locIDs.length]) {
-        client.locations.check(parseInt(event.target.getAttribute('data-el')));
-    } else {
-        if (parseInt(event.target.getAttribute('data-el')) == 999999999999999) {
-            client.say(sessionStorage.getItem('player') + " has finished their game!")
-            for (var i = 0; i < locIDs.length - 1; i++) {
-                client.locations.check(parseInt(locIDs[i]));
-                for (var j = 0; j < document.getElementsByClassName("locations").length; j++) {
-                    if (document.getElementsByClassName('locations')[j].id == locIDs[i]) {
-                        document.getElementsByClassName('locations')[j].style.display = 'none';
-                    }
+    if (parseInt(event.target.getAttribute('data-el')) == 999999999999999) {
+        console.log('test')
+        client.say(sessionStorage.getItem('player') + " has finished their game!")
+        for (var i = 0; i < locIDs.length - 1; i++) {
+            client.locations.check(parseInt(locIDs[i]));
+            for (var j = 0; j < document.getElementsByClassName("locations").length; j++) {
+                if (document.getElementsByClassName('locations')[j].id == locIDs[i]) {
+                    document.getElementsByClassName('locations')[j].style.display = 'none';
                 }
             }
+        }
+    } else {
+        if (event.target.getAttribute('data-el') != locIDs[locIDs.length]) {
+            client.locations.check(parseInt(event.target.getAttribute('data-el')));
         }
     }
     for (var j = 0; j < document.getElementsByClassName("locations").length; j++) {
