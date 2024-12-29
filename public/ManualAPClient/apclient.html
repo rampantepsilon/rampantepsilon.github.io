@@ -15,31 +15,26 @@
     </div>
     <table
         style="height: calc(97vh - 150px); background-color: rgba(68, 68, 68, 0.76); padding: 20px; border-radius: 25px; border: 2px solid white;">
+
         <tr>
-            <td style="text-align:center; vertical-align: top; height: 10px; width: 38vw;">
-                <div>Items</div>
+            <td style="text-align: center; vertical-align: top; width: 50%;">
+                <div>
+                    <button onclick="openTab('items')" style="width:25%">Items</button>
+                    <button onclick="openTab('locations')" style="width:25%">Locations</button>
+                    <button onclick="openTab('hints')" style="width:25%">Hints</button>
+                </div>
+
+                <div class="checks info" id="items"></div>
+                <div class='checks info' id="locations" style="display: none;"></div>
+                <div class='info' id='hints' style="display: none;"></div>
             </td>
-            <td style="text-align:center; vertical-align: top; height: 10px; width: 38vw;">
-                <div>Locations</div>
-            </td>
-            <td style="text-align:center; vertical-align: top; height: 10px; width: 20vw;">
-                <!--onclick="showHide('hints')"-->
-                <div>Hints</div>
-            </td>
-        </tr>
-        <tr>
-            <td style="vertical-align: top; width: 38vw;">
-                <div class="checks" id="items"></div>
-            </td>
-            <td style="vertical-align: top; width: 38vw;">
-                <div class='checks' id="locations"></div>
-            </td>
-            <td style="vertical-align: top; width: 20vw;">
-                <div id='hints'></div>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" style="vertical-align: top; width: 100%;">
+            <td style="vertical-align: top; width: 50%;">
+                <div style="text-align: center;">
+                    <span style='color:gold'>Progression Item</span> |
+                    <span style='color:lawngreen'>Useful Item</span> |
+                    <span style="color: lightcoral;">Trap Item</span> |
+                    <span style='color:cornflowerblue'>Filler Item</span>
+                </div>
                 <div id="log"></div>
             </td>
         </tr>
@@ -47,27 +42,24 @@
             <td colspan="3" align="right" style="height: 100px">
                 <table width="100%">
                     <tr>
-                        <td style="vertical-align: bottom; width: 20%" align="center">
+                        <!--<td style="vertical-align: bottom; width: 20%" align="center">
                             <label for="searchbox">Filter By Location</label><br>
                             <input type="search" oninput="liveSearch()" id="searchbox">
-                        </td>
-                        <td style="vertical-align: bottom; width: 40%" align="center">Chat<br><input type="text"
-                                id="chatBox" style="width: 100%;"></td>
-                        <td style='vertical-align: bottom; text-align: right; width: 20%;' id="deathlinkContainer">
+                        </td>-->
+                        <td style='vertical-align: bottom; text-align: right; width: 20vw;' id="deathlinkContainer">
                             <button class="connButton" id="deathlink">Death</button>
                         </td>
-                        <td style='vertical-align: bottom; text-align: right; width: 20%;'>
+                        <td style='vertical-align: bottom; text-align: right; width: 20vw;'>
                             <div>
                                 <button class="connButton" onclick="disconnect()">Disconnect</button>
                             </div>
                         </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" align="center">
-                            <span style='color:gold'>Progression Item</span> |
-                            <span style='color:lawngreen'>Useful Item</span> |
-                            <span style="color: lightcoral;">Trap Item</span> |
-                            <span style='color:cornflowerblue'>Filler Item</span>
+                        <td style="width: 10vw" align="right">
+                            Chat:
+                        </td>
+                        <td style="vertical-align: bottom; width: 50vw" align="center">
+                            <input type="text" id="chatBox"
+                                style="width: 100%; padding: 8px 8px; margin: 8px 0; box-sizing: border-box;background-color: rgba(68, 68, 68, 0.76); color: white; border: 2px solid white;">
                         </td>
                     </tr>
                 </table>
@@ -91,6 +83,16 @@
     <script src="scripts/build.js"></script>
     <script src="scripts/apclient.js"></script>
     <script type="module" src="scripts/archipelago.js"></script>
+    <script>
+        function openTab(tabName) {
+            var i;
+            var x = document.getElementsByClassName("info");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+        }
+    </script>
 </body>
 
 </html>

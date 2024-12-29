@@ -31,10 +31,17 @@
             <td colspan="3" align="right" style="height: 100px">
                 <table width="100%">
                     <tr>
-                        <td style="vertical-align: bottom; width: 50%" align="center">Chat<br><input type="text"
-                                id="chatBox" style="width: 100%;"></td>
-                        <td style='vertical-align: bottom; text-align: right; width: 25%;'>
-                            <div><button class="connButton" onclick="disconnect()">Disconnect</button></div>
+                        <td align="right">
+                            Chat:
+                        </td>
+                        <td style="vertical-align: bottom; width: 80vw" align="center">
+                            <input type="text" id="chatBox"
+                                style="width: 100%; padding: 8px 8px; margin: 8px 0; box-sizing: border-box;background-color: rgba(68, 68, 68, 0.76); color: white; border: 2px solid white;">
+                        </td>
+                        <td style='vertical-align: bottom; text-align: right; width: 20vw;'>
+                            <div>
+                                <button class="connButton" onclick="disconnect()">Disconnect</button>
+                            </div>
                         </td>
                     </tr>
                 </table>

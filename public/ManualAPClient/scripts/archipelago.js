@@ -16,7 +16,7 @@ const connectionInfo = {
     name: sessionStorage.getItem('player'), // Replace with the player slot name.
     items_handling: ITEMS_HANDLING_FLAGS.REMOTE_ALL,
     version: {
-        build: 0,
+        build: 1,
         major: 0,
         minor: 5,
     },
@@ -36,7 +36,7 @@ client.addListener(SERVER_PACKET_TYPE.CONNECTED, (packet) => {
         //console.log(client.items.received);
         hideLocations();
         if (!JSON.parse(sessionStorage.getItem('tags')).includes('DeathLink')) {
-            $("#deathlinkContainer").hide();
+            $("#deathlink").hide();
         }
     }, 500);
 });

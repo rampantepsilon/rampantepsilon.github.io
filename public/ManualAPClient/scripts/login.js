@@ -73,9 +73,9 @@ $("#style").on("change", function (evt) {
                 var DLRadio = document.getElementsByName('deathlink');
                 var checked = Array.from(DLRadio).find((radio) => radio.checked);
                 if (checked.value == 'yes') {
-                    sessionStorage.setItem('tags', JSON.stringify(['AP', 'ManualWeb', 'DeathLink', '(WIP)']))
+                    sessionStorage.setItem('tags', JSON.stringify(['AP', 'ManualWeb', 'DeathLink', 'Web Client (WIP)', 'rampantepsilon.github.io/ManualAPClient']))
                 } else {
-                    sessionStorage.setItem('tags', JSON.stringify(['AP', 'ManualWeb', '(WIP)']));
+                    sessionStorage.setItem('tags', JSON.stringify(['AP', 'ManualWeb', 'Web Client (WIP)', 'rampantepsilon.github.io/ManualAPClient']));
                 }
 
                 //Get information JSONs

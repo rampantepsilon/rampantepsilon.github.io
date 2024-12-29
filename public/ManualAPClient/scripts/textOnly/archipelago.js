@@ -16,11 +16,11 @@ const connectionInfo = {
     name: sessionStorage.getItem('player'), // Replace with the player slot name.
     items_handling: ITEMS_HANDLING_FLAGS.REMOTE_ALL,
     version: {
-        build: 5,
+        build: 1,
         major: 0,
-        minor: 4,
+        minor: 5,
     },
-    tags: ['TextOnly', 'ManualWeb', '(WIP)'],//tags: ['AP', 'DeathLink', '(WIP)']
+    tags: ['TextOnly', 'Web Client (WIP)', 'rampantepsilon.github.io/ManualAPClient'],//tags: ['AP', 'DeathLink', '(WIP)']
     slot_data: false
 };
 

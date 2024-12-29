@@ -259,7 +259,7 @@ input[type="file"]::file-selector-button:active {
 
 div#log,
 div#hints {
-    height: calc(99%);
+    height: calc(95%);
     margin: 0;
     padding: 0;
     overflow: auto;
@@ -267,7 +267,7 @@ div#hints {
 
 div#items,
 div#locations {
-    height: calc(99%);
+    height: calc(95%);
     margin: 0;
     padding: 0;
     overflow: auto;
