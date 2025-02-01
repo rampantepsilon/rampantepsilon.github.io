@@ -178,6 +178,9 @@ client.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (packet) => {
                     document.getElementsByClassName(receivedItem + "2")[j].classList.remove('is-hidden');
                 }
             }
+            if (document.getElementsByClassName(receivedItem + "2").length == 2) {
+                document.getElementsByClassName(receivedItem + "2")[1].classList.remove('is-hidden');
+            }
         }
     }
 

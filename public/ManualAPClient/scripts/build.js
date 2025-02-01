@@ -1,4 +1,4 @@
-var versionTag = "Archipelago Web Client v0.5.1 Build 20241228 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
+var versionTag = "Archipelago Web Client v0.5.1 Build 20250201 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
 
 document.getElementById('buildText').innerHTML = versionTag;
 
@@ -10,6 +10,7 @@ document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archip
 <li>Updated Text Only to reflect v0.5.1</li>
 <li>Updated tags to display the website and to show you are using the Web Client</li>
 <li>Updated Chatbox to have styling to match the rest of the page</li>
+<li>Fixed bug with certain Manual Worlds not showing everything properly</li>
 </ul>
 <h4>Known Issues</h4>
 <ul>
