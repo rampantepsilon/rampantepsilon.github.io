@@ -18,7 +18,7 @@ const connectionInfo = {
     version: {
         build: 1,
         major: 0,
-        minor: 5,
+        minor: 6,
     },
     tags: ['TextOnly', 'Web Client (WIP)', 'rampantepsilon.github.io/ManualAPClient'],//tags: ['AP', 'DeathLink', '(WIP)']
     slot_data: false

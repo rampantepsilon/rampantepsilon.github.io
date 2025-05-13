@@ -4,7 +4,7 @@ import {
     SERVER_PACKET_TYPE,
     CLIENT_PACKET_TYPE,
     LocationsManager,
-} from "../scripts/archipelago.js@1.0.0.js";
+} from "../scripts/archipelago.min.js";
 
 // Create a new Archipelago client
 const client = new Client();
@@ -18,7 +18,7 @@ const connectionInfo = {
     version: {
         build: 1,
         major: 0,
-        minor: 5,
+        minor: 6,
     },
     tags: JSON.parse(sessionStorage.getItem('tags'))//tags: ['AP', 'DeathLink', '(WIP)']
 };
