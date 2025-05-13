@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <script src="jszip.js"></script>
+    <script src="scripts/jszip-utils.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    Load .apworld: <input type="file" id="apworld" name="apworld">
+    <div id="items"></div>
+    <div id="locations"></div>
+</body>
+
+<script>
+    var cleanLocations = [];
+    var cleanItems = [];
+    $("#apworld").on("change", function (evt) {
+        if (document.getElementById('apworld').value.includes('.apworld')) {
+            cleanLocations = [];
+            cleanItems = [];
+
+            var rootDir = document.getElementById('apworld').value;
+            rootDir = rootDir.substring(rootDir.indexOf('\manual'), rootDir.indexOf('.apworld'));
+
+            var zip = new JSZip();
+
+            zip.loadAsync(this.files[0]).then(function (zip) {
+                var fileList = [];
+                for (let [filename, file] of Object.entries(zip.files)) {
+                    fileList.push(filename);
+                }
+
+                const seedLocations = zip.file(rootDir + '/data/locations.json')
+                const seedItems = zip.file(rootDir + '/data/items.json')
+
+                seedLocations.async('string').then((content) => {
+                    var locationTemp = JSON.parse(content);
+
+                    for (i in locationTemp) {
+                        var requiresTemp = locationTemp[i]['requires'].toString().replace(/\|/g, "").replace(/\n/g, "").replace(/ AND /g, ",")
+                        cleanLocations[i] = { "name": locationTemp[i]["name"], "requires": requiresTemp.split(','), obtained: 0 }
+                    }
+                    displayLocations();
+                })
+
+                seedItems.async('string').then((content) => {
+                    var itemTemp = JSON.parse(content);
+
+                    for (i in itemTemp) {
+                        var itemName = itemTemp[i]["name"];
+                        cleanItems[i] = itemName;
+                    }
+                    displayItems();
+                })
+            })
+        }
+    })
+
+    function displayLocations() {
+        document.getElementById('locations').innerHTML = "";
+        for (i in cleanLocations) {
+            document.getElementById('locations').innerHTML += `<div id="location` + i + `">` + cleanLocations[i]["name"] + `</div>`;
+            $("#location" + i).hide();
+        }
+    }
+
+    function displayItems() {
+        document.getElementById('items').innerHTML = "";
+        for (i in cleanItems) {
+            document.getElementById('items').innerHTML += `<div id="item` + i + `">` + cleanItems[i] + `</div>`;
+        }
+    }
+
+    function showAvailLoc() {
+        for (i in cleanLocations) {
+            for (j in cleanItems) {
+                if (cleanLocations[i]['requires'].includes(cleanItems[j])) {
+                    cleanLocations[i]['obtained'] += 1;
+                    if (cleanLocations[i]['obtained'] == cleanLocations[i]['requires'].length) {
+                        $("#location" + i).show()
+                    }
+                }
+            }
+        }
+    }
+
+    function testShow() {
+        for (i in cleanLocations) {
+            for (j in cleanItems) {
+                if (cleanLocations[i]["requires"].includes(cleanItems[j])) {
+                    cleanLocations[i]['obtained'] += 1;
+                    if (cleanLocations[i]['obtained'] == cleanLocations[i]['requires'].length) {
+                        $("#" + i).show()
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+</html>

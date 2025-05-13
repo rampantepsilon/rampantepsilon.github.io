@@ -12,7 +12,7 @@ document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archip
 <li>Victory button cannot be hidden.</li>
 <li>Hints not retaining marked status upon chat refresh.</li>
 <li>Possible issue with Traps not showing proper colors.</li>
-<li>Hints not showing proper coloring.</li>
+<li>Hints not showing proper coloring. </li>
 <li>Items not retaining marked status upon refresh.</li>
 </ul>`
 
