@@ -1,4 +1,4 @@
-var versionTag = "Archipelago Web Client v0.6.1 Build 20250201 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
+var versionTag = "Archipelago Web Client v0.6.1 Build 20250601 Built by <a style='color:white;' href='https://github.com/rampantepsilon'>RampantEpsilon</a>";
 
 document.getElementById('buildText').innerHTML = versionTag;
 
@@ -6,6 +6,7 @@ document.getElementById('changelog').innerHTML = `<h4>Please note: Manual Archip
 <h3>Changes to ` + versionTag + `</h3>
 <ul>
 <li>Added update for v0.6.1 of Archipelago</li>
+<li>HOTFIX: Fixed issue where tracker would break upon joining server.</li>
 </ul>
 <h4>Known Issues</h4>
 <ul>

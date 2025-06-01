@@ -4,7 +4,7 @@ import {
     SERVER_PACKET_TYPE,
     CLIENT_PACKET_TYPE,
     LocationsManager,
-} from "../scripts/archipelago.min.js";
+} from "../scripts/archipelago.js@1.0.0.js";
 
 // Create a new Archipelago client
 const client = new Client();
