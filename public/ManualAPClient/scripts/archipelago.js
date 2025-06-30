@@ -161,6 +161,8 @@ document.getElementById('deathlink').addEventListener("click", () => {
 client.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (packet) => {
     var packetItems = packet.items;
 
+    console.log(packet)
+
     for (i in packet.items) {
         hintItemsFound.push(packet.items[i]["item"]);
     }
@@ -174,12 +176,12 @@ client.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (packet) => {
             var currentCount = parseInt(document.getElementsByClassName(receivedItem)[j].innerHTML);
             document.getElementsByClassName(receivedItem)[j].innerHTML = currentCount + 1;
             if (receivedItem != 0) {
-                if (document.getElementsByClassName(receivedItem + "2")[j]) {
-                    document.getElementsByClassName(receivedItem + "2")[j].classList.remove('is-hidden');
+                if (document.getElementsByClassName("0" + receivedItem)[j]) {
+                    document.getElementsByClassName("0" + receivedItem)[j].classList.remove('is-hidden');
                 }
             }
-            if (document.getElementsByClassName(receivedItem + "2").length == 2) {
-                document.getElementsByClassName(receivedItem + "2")[1].classList.remove('is-hidden');
+            if (document.getElementsByClassName("0" + receivedItem).length == 2) {
+                document.getElementsByClassName("0" + receivedItem)[1].classList.remove('is-hidden');
             }
         }
     }

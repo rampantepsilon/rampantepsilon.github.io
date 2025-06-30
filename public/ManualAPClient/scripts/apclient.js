@@ -74,7 +74,7 @@ for (i in uniqueItemCat) {
                     styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("&", "").replaceAll("+", "plus");
                 }
 
-                items.innerHTML += "<span class='itemCard " + itemIDs[j] + "2 " + styleCombine + " is-hidden'><div class='items itemsStyle' id='" + uniqueItemCat[i] + "' data-id='" + itemIDs[j] + "'>" + itemNames[j] + " (<span class='" + itemIDs[j] + "'>0</span>)</div></span>"
+                items.innerHTML += "<span class='itemCard 0" + itemIDs[j] + " " + styleCombine + " is-hidden'><div class='items itemsStyle' id='" + uniqueItemCat[i] + "' data-id='" + itemIDs[j] + "'>" + itemNames[j] + " (<span class='" + itemIDs[j] + "'>0</span>)</div></span>"
             } else if (itemCat[j] == null) {
                 styleSplit = uniqueItemCat[i].split(' ');
                 var styleCombine = '';
@@ -83,7 +83,7 @@ for (i in uniqueItemCat) {
                     styleCombine += styleSplit[l].replaceAll("[", '').replaceAll(']', '').replaceAll("'", "").replaceAll(" ", "").replaceAll("&", "").replaceAll("+", "plus");
                 }
 
-                items.innerHTML += "<span class='itemCard " + itemIDs[j] + "2 " + styleCombine + " is-hidden'><div class='items itemsStyle' id='" + uniqueItemCat[i] + "' data-id='" + itemIDs[j] + "'>" + itemNames[j] + " (<span class='" + itemIDs[j] + "'>0</span>)</div></span>"
+                items.innerHTML += "<span class='itemCard 0" + itemIDs[j] + " " + styleCombine + " is-hidden'><div class='items itemsStyle' id='" + uniqueItemCat[i] + "' data-id='" + itemIDs[j] + "'>" + itemNames[j] + " (<span class='" + itemIDs[j] + "'>0</span>)</div></span>"
             }
         }
     }
